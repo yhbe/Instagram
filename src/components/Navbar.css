@@ -1,0 +1,71 @@
+:root {
+  --primary: #fff;
+}
+
+.navbar--container{
+  display: flex;
+  width: 100vw;
+  height: 100px;
+  background-color: var(--primary);
+  font-size: 2rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo-container{
+  display: flex;
+  height: 100%;
+  width: max-content;
+  font-size: 1.0rem;
+  align-items: center;
+  flex: 1;
+  justify-content: center;
+}
+
+.logo--group{
+  display: flex;
+  cursor: pointer;
+  gap: 3px;
+  align-items: center;
+}
+
+.logo--image{
+  object-fit: contain;
+  width: 35px;
+  height: 35px;
+}
+
+.searchbox--container{
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  vertical-align: middle;
+  flex: 2;
+}
+
+.search--input{
+  height: 25px;
+  text-align: center;
+  border-radius: 25px;
+  border: 1px solid gray;
+}
+
+.search--input:focus{
+  width: 300px;
+  height: 30px;
+  text-indent: 15px;
+  text-align: left;
+  transition: all 0.5s;
+  border: 1px solid gray;
+}
+
+.buttons-container{
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  gap: 15px;
+}
+
+.buttons-container > *{
+  cursor: pointer;
+}

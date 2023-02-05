@@ -1,0 +1,10 @@
+*{
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+  font-family: Helvetica, sans-serif;
+}
+
+body{
+  background-color: rgba(167, 163, 163, 0.247);
+}
