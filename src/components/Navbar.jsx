@@ -30,6 +30,7 @@ function Navbar() {
   }
 
   return (
+    <>
     <div className="navbar--container">
       <div className="logo-container">
         <div className="logo--group">
@@ -48,6 +49,7 @@ function Navbar() {
         <div className="mobile--container">{createButtons()}</div>
       )}
     </div>
+    </>
   );
 }
 

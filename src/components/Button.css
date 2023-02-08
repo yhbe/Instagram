@@ -1,0 +1,17 @@
+.button{
+  width: 208px;
+  height: 36px;
+  border: none;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.black{
+  background-color: black;
+  color: white;
+}
+
+.white {
+  background-color: white;
+}
