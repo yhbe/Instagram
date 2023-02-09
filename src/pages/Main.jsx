@@ -1,9 +1,25 @@
 import React from 'react'
+import styles from "./Main.css"
 import Button from '../components/Button';
 import Navbar from "../components/Navbar"
-import styles from "./Main.css"
+import { useNavigate } from 'react-router-dom';
 
-function Main() {
+function Main(props) {
+  let [signUpButtonClick, setSignUpButtonClick] = React.useState(false)
+
+  let navigate = useNavigate();
+
+  function signUp(){
+    if (!props.loggedIn){
+      setSignUpButtonClick(true)
+    }
+    navigate("../signup")
+  }
+
+  function login(){
+    console.log("Logging in")
+  }
+  
   return (
     <div className="main--container">
       <Navbar />
@@ -12,8 +28,8 @@ function Main() {
       Content
       </div>
       <div className='signup-login--container'>
-        <Button text="Sign up" color="black button"/>
-        <Button text="Login" color="white button"/>
+        <Button onclick={() => signUp()} text="Sign up" color="black button"/>
+        <Button onclick={() => login()} text="Login" color="white button"/>
       </div>
       </div>
     </div>

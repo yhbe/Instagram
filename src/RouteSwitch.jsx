@@ -6,10 +6,13 @@ import {ref, uploadBytes } from "firebase/storage"
 import { collection, getDocs } from "firebase/firestore";
 import React from 'react';
 import {v4} from "uuid"
+import Signup from './pages/Signup';
 
 
 function RouteSwitch() {
+  const [loggedIn, setLoggedIn] = React.useState(false);
   let [data, setData] = React.useState([])
+
   // const imageRef = ref(storage, `${v4()}`)
   // console.log(imageRef)
   
@@ -27,7 +30,8 @@ function RouteSwitch() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<Main />}/>
+        <Route path='/' element={<Main loggedIn={loggedIn} setLoggedIn={setLoggedIn} />}/>
+        <Route path="/signup" element={<Signup />}/>
       </Routes>
     </BrowserRouter>
   )

@@ -84,7 +84,7 @@
 
 .mobile--container{
   display: flex;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   height: 75px;
   width: 100vw;
@@ -95,6 +95,10 @@
 
 
 @media screen and (max-width: 960px) {
+
+  .navbar--container{
+    height: min-content;
+  }
 
   .buttons-ul{
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.671);

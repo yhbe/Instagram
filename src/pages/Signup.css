@@ -1,0 +1,77 @@
+.signup--main{
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+}
+
+.content--div{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
+.content--inner-div{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(128, 128, 128, 0);
+  height: 600px;
+  width: 450px;
+  border-radius: 45px;
+  margin-top: -5rem;
+}
+
+.signup--input{
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.instagram-logo{
+  align-self: center;
+  width: 50px;
+  height: 50px;
+}
+
+.input--at{
+  position: absolute;
+  left: 10px;
+  font-size: 1.3rem;
+  width: 34px;
+  color: rgba(0, 0, 0, 0.288);
+  border-right: 1px solid rgba(0, 0, 0, 0.288);
+}
+
+.input-username{
+  height: 50px;
+  width: 400px;
+  border-radius: 25px;
+  text-indent: 50px;
+  border: 1px solid rgba(128, 128, 128, 0.5);
+  font-size: 1.3rem;
+}
+
+.button--container > button {
+  margin-bottom: 50px;
+}
+
+@media screen and (max-width: 960px) {
+  .content--inner-div{
+    height: 100%;
+    width: 100%;
+    border-radius: 0;
+  }
+
+    .logo-text-div {
+      margin-top: -100px;
+      margin-bottom: 100px
+    }
+  
+    .input--text-div {
+      margin-bottom: 30px
+    }
+
+}

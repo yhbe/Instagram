@@ -1,9 +1,12 @@
 import "./Navbar.css"
 import React from "react";
+import { useNavigate } from 'react-router-dom';
 
 function Navbar() {
   const [showButtons,setShowButtons] = React.useState(false)
 
+  
+  
   const removeButtons = () => {
     if (window.innerWidth <= 960){
       setShowButtons(false)
@@ -11,13 +14,13 @@ function Navbar() {
       setShowButtons(true)
     }
   }
-
+  
   window.addEventListener("resize", () => removeButtons())
-
+  
   React.useEffect(() => {
     removeButtons()
   }, [])
-
+  
   function createButtons(){
     return (
       <ul className="buttons-ul">
@@ -28,27 +31,41 @@ function Navbar() {
       </ul>
     );
   }
+  
+  let navigate = useNavigate();
+  function homePage(){
+    navigate("../")
+
+  }
 
   return (
     <>
-    <div className="navbar--container">
-      <div className="logo-container">
-        <div className="logo--group">
-          <img className="logo--image" src="./instagramimage.png"></img>
-          <h1>Instagram</h1>
-        </div>
+      <div className="navbar--container">
+        {showButtons && (
+          <>
+            <div className="logo-container">
+              <div onClick={() => homePage()} className="logo--group">
+                <img className="logo--image" src="./instagramimage.png"></img>
+                <h1>Instagram</h1>
+              </div>
+            </div>
+            <div className="searchbox--container">
+              <input
+                className="search--input"
+                type="text"
+                placeholder="Search"
+              />
+            </div>
+          </>
+        )}
+        {showButtons ? (
+          <div className="buttons-container">
+            {showButtons && createButtons()}
+          </div>
+        ) : (
+          <div className="mobile--container">{createButtons()}</div>
+        )}
       </div>
-      <div className="searchbox--container">
-        <input className="search--input" type="text" placeholder="Search" />
-      </div>
-      {showButtons ? (
-        <div className="buttons-container">
-          {showButtons && createButtons()}
-        </div>
-      ) : (
-        <div className="mobile--container">{createButtons()}</div>
-      )}
-    </div>
     </>
   );
 }
