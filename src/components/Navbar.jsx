@@ -21,10 +21,10 @@ function Navbar() {
   function createButtons(){
     return (
       <ul className="buttons-ul">
-        <li><i class="fa-sharp fa-solid fa-house-chimney"></i></li>
-        <li> <i class="fa-regular fa-comment"></i></li>
-        <li><i class="fa-regular fa-heart"></i></li>
-        <li><i class="fa-regular fa-user"></i></li>
+        <li><i className="fa-sharp fa-solid fa-house-chimney"></i></li>
+        <li> <i className="fa-regular fa-comment"></i></li>
+        <li><i className="fa-regular fa-heart"></i></li>
+        <li><i className="fa-regular fa-user"></i></li>
       </ul>
     );
   }
