@@ -17,15 +17,15 @@ function Signup() {
       <div className='input--text-div'>
         <div className='signup--input'>
         <p className='input--at'>@</p>
-        <input className='input-username' type="text"   placeholder='username' />
+        <input className='input-username' type="text"   placeholder='username' minLength={3} maxLength={15}/>
 
         </div>
-    <p>Name must be 3-15 characters.</p>
+    <p className='limit-range-text'>Name must be 3-15 characters.</p>
       </div>
     
     <div className='button--container'>
-      <Button text={"Sign Up With Google"} color={"black button"}/>
-      <h4>Already Signed up?</h4>
+      <Button text={"Sign Up With Google"} color={"gray button"}/>
+      <p className='signup--text'>Already Signed up?</p>
       <Button text={"Login"} color="gray outline button"/>
     </div>
 
