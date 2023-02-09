@@ -86,7 +86,8 @@
     height: 100%;
     width: 100%;
     border-radius: 0;
-    justify-content: center
+    justify-content: center;
+    
   }
 
   .logo-text-div {
@@ -97,6 +98,10 @@
   .input--text-div {
     margin-top: -25px;
     margin-bottom: 45px
+  }
+  
+  .button--container{
+    margin-bottom: -100px;
   }
 
   .button--container > button {
