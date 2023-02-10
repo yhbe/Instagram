@@ -11,10 +11,11 @@ import Signup from './pages/Signup';
 
 function RouteSwitch() {
   const [loggedIn, setLoggedIn] = React.useState(false);
-  let [data, setData] = React.useState([])
-
+  const [data, setData] = React.useState([])
+  const [user,setUser] = React.useState(null)
   // const imageRef = ref(storage, `${v4()}`)
   // console.log(imageRef)
+  console.log(loggedIn,user)
   
   const usersCollectionRef = collection(db, "posts");
 
@@ -30,11 +31,14 @@ function RouteSwitch() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<Main loggedIn={loggedIn} setLoggedIn={setLoggedIn} />}/>
-        <Route path="/signup" element={<Signup />}/>
+        <Route
+          path="/"
+          element={<Main loggedIn={loggedIn} setLoggedIn={setLoggedIn} />}
+        />
+        <Route path="/signup" element={<Signup setLoggedIn={setLoggedIn} setUser={setUser}/>} />
       </Routes>
     </BrowserRouter>
-  )
+  );
 }
 
 export default RouteSwitch
