@@ -4,7 +4,7 @@
   flex-direction: column;
 }
 
-.content--div{
+.signup--content-div{
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -12,7 +12,7 @@
   align-items: center;
 }
 
-.content--inner-div{
+.signup--content-inner-div{
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -21,7 +21,7 @@
   height: 600px;
   width: 450px;
   border-radius: 45px;
-  margin-top: -5rem;
+  margin-bottom: -48rem;
   background-color: white;
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.459);
   justify-content: space-evenly;
@@ -86,7 +86,7 @@
 
 
 @media screen and (max-width: 960px) {
-  .content--inner-div{
+  .signup--content-inner-div{
     height: 100%;
     width: 100%;
     border-radius: 0;
@@ -95,7 +95,6 @@
   }
 
   .logo-text-div {
-    margin-top: -115px;
     margin-bottom: 115px
   }
 

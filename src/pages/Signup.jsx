@@ -46,8 +46,8 @@ function Signup(props) {
   return (
     <div className='signup--main'>
     <Navbar />
-    <div className='content--div'>
-    <div className='content--inner-div'>
+    <div className='signup--content-div'>
+    <div className='signup--content-inner-div'>
       <div className='logo-text-div'>
     <img className='instagram-logo' src={image}></img>
     <h1>Sign Up</h1>
