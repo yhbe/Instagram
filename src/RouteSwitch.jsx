@@ -11,29 +11,28 @@ import Signup from './pages/Signup';
 
 function RouteSwitch() {
   const [loggedIn, setLoggedIn] = React.useState(false);
-  const [data, setData] = React.useState([])
+  const [posts, setPosts] = React.useState([])
   const [user,setUser] = React.useState(null)
-  // const imageRef = ref(storage, `${v4()}`)
-  // console.log(imageRef)
+
+  console.log(posts)
   console.log(loggedIn,user)
   
-  const usersCollectionRef = collection(db, "posts");
+  const usersCollectionRef = collection(db, "users");
 
   React.useEffect(() => {
     const getData = async () => {
       const data = await getDocs(usersCollectionRef);
-      setData(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      setPosts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
     getData();
   }, []);
 
-  console.log(data)
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path="/"
-          element={<Main loggedIn={loggedIn} setLoggedIn={setLoggedIn} user={user} />}
+          element={<Main loggedIn={loggedIn} setLoggedIn={setLoggedIn} user={user} posts={posts}/>}
         />
         <Route path="/signup" element={<Signup setLoggedIn={setLoggedIn} setUser={setUser}/>} />
       </Routes>

@@ -21,3 +21,62 @@
   margin-top: 5rem;
 }
 
+.instagram--post{
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  width: 650px;
+  height: 650px;
+  background-color: gray;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+
+.instagram--post-header{
+  display: flex;
+  padding: 10px 20px;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
+  border-top-left-radius: 9px;
+  border-top-right-radius: 9px;
+}
+
+.header-left{
+  display: flex;
+  align-items: center;
+}
+
+
+.post--profile-picture{
+  height: 50px;
+  width: 50px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 50%;
+  
+}
+
+.instagram--post-image{
+  height: 100%;
+  width: 100%;
+  background-color: red;
+}
+
+.image{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.instagram--post-footer{
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+}
+
+.interact-row{
+  display: flex;
+  justify-content: space-between;
+}
