@@ -33,7 +33,7 @@ function RouteSwitch() {
       <Routes>
         <Route
           path="/"
-          element={<Main loggedIn={loggedIn} setLoggedIn={setLoggedIn} />}
+          element={<Main loggedIn={loggedIn} setLoggedIn={setLoggedIn} user={user} />}
         />
         <Route path="/signup" element={<Signup setLoggedIn={setLoggedIn} setUser={setUser}/>} />
       </Routes>

@@ -19,6 +19,15 @@ function Main(props) {
   function login(){
     console.log("Logging in")
   }
+
+  function signedInDiv(){
+    return (
+      <>
+        <h2>Hello</h2>
+        <p>{props.user}</p>
+      </>
+    )
+  }
   
   return (
     <div className="main--container">
@@ -28,8 +37,12 @@ function Main(props) {
       Content
       </div>
       <div className='signup-login--container'>
+        {props.loggedIn ? 
+        signedInDiv() :
+        <>
         <Button onclick={() => signUp()} text="Sign up" color="black button"/>
         <Button onclick={() => login()} text="Login" color="white button"/>
+        </>}
       </div>
       </div>
     </div>
