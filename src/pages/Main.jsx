@@ -58,9 +58,17 @@ function Main(props) {
     );
   }
 
+  function goToProfile(event){
+    let id =
+      event.target.parentElement.parentElement.parentElement.parentElement.id;
+      navigate(`/user/${id}`, {user: "hotdog"})
+  }
+
   function createPosts(post){
     return (
-      <div className="instagram--post">
+      <div 
+      id={post.domain}
+      className="instagram--post">
         <div className="instagram--post-header">
           <div className="header-left">
             <img
@@ -68,8 +76,8 @@ function Main(props) {
               src={post.profilepicture}
             ></img>
             <div className="header-left-text">
-              <p>{post.username}</p>
-              <p className='user-domain'>@{post.domain}</p>
+              <p onClick={(event) => goToProfile(event)}>{post.username}</p>
+              <p className="user-domain">@{post.domain}</p>
             </div>
           </div>
           <img src={image}></img>
@@ -86,9 +94,9 @@ function Main(props) {
             </div>
             <i class="fa-solid fa-link"></i>
           </div>
-          <p className='likes'>54 Likes</p>
+          <p className="likes">54 Likes</p>
           <div className="comments--row">
-            <p className='view-all-comments'>View All Comments</p>
+            <p className="view-all-comments">View All Comments</p>
             <p>
               <strong>samCho</strong> Great Picture
             </p>
