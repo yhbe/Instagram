@@ -108,6 +108,8 @@
 
 .yourprofileinnercontainer{
   display: flex;
+  align-items: center;
+  margin-bottom: 5px;
 }
 
 .yourinfo--footer{
@@ -118,7 +120,20 @@
   gap: 20px;
 }
 
-@media screen and (min-width: 960px) {
+.yourinfo-container-image{
+  height: 80px;
+  width: 80px;
+}
+
+.yourinfo-image{
+  height: 100%;
+  width: 100%;
+  border-radius: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+@media screen and (min-width: 961px) {
   .signup-login--container{
     top: 130px;
   }
@@ -135,7 +150,6 @@
   .signup-login--container{
     position: relative;
     margin: 0;
-    margin-bottom: -50px;
   }
 }
 

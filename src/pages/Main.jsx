@@ -4,6 +4,7 @@ import Button from '../components/Button';
 import Navbar from "../components/Navbar"
 import { useNavigate } from 'react-router-dom';
 import image from "/more-hori.svg"
+import defaultImage from "/defaultimage.jpg"
 
 function Main(props) {
   let [signUpButtonClick, setSignUpButtonClick] = React.useState(false)
@@ -26,7 +27,7 @@ function Main(props) {
       <div className="your-profile-info-container">
         <div className="yourprofileinnercontainer">
           <div className="yourinfo-container-image">
-            <img src={image} className="yourinfo-image"></img>
+            <img src={defaultImage} className="yourinfo-image"></img>
           </div>
           <div className="yourinfo-text">
             <h2>Hello</h2>
