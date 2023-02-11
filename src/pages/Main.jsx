@@ -69,7 +69,7 @@ function Main(props) {
             ></img>
             <div className="header-left-text">
               <p>{post.username}</p>
-              <p>@{post.domain}</p>
+              <p className='user-domain'>@{post.domain}</p>
             </div>
           </div>
           <img src={image}></img>
@@ -86,9 +86,9 @@ function Main(props) {
             </div>
             <i class="fa-solid fa-link"></i>
           </div>
-          <p>54 Likes</p>
+          <p className='likes'>54 Likes</p>
           <div className="comments--row">
-            <p>view all comments</p>
+            <p className='view-all-comments'>View All Comments</p>
             <p>
               <strong>samCho</strong> Great Picture
             </p>
