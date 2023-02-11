@@ -28,6 +28,10 @@
   top: 50px;
 }
 
+.signup-login--container > button {
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.377);
+}
+
 .instagram--post{
   display: flex;
   flex-direction: column;
@@ -37,7 +41,7 @@
   background-color: gray;
   margin-bottom: 10px;
   border-radius: 10px;
-  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.692);
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.377);
   transition: all 1s;
 }
 
@@ -83,7 +87,9 @@
   display: flex;
   flex-direction: column;
   background-color: white;
-  padding: 5px 11px;
+  padding: 5px 8px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 .interact-row{
