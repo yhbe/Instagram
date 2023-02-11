@@ -4,7 +4,9 @@
 
 .navbar--container{
   display: flex;
-  height: 100px;
+  height: 85px;
+  position: sticky;
+  top: 0;
   background-color: var(--primary);
   font-size: 2rem;
   align-items: center;
