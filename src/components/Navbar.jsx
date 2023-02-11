@@ -1,6 +1,7 @@
 import "./Navbar.css"
 import React from "react";
 import { useNavigate } from 'react-router-dom';
+import instagramimage from "/instagramimage.png"
 
 function Navbar() {
   const [showButtons,setShowButtons] = React.useState(false)
@@ -45,7 +46,7 @@ function Navbar() {
           <>
             <div className="logo-container">
               <div onClick={() => homePage()} className="logo--group">
-                <img className="logo--image" src="./instagramimage.png"></img>
+                <img className="logo--image" src={instagramimage}></img>
                 <h1>Instagram</h1>
               </div>
             </div>
