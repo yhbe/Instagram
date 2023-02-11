@@ -3,6 +3,8 @@ import Navbar from '../components/Navbar'
 import style from "./Signup.css"
 import Button from '../components/Button'
 import image from "/instagramimage.png"
+import { useNavigate } from "react-router-dom";
+
 
 
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
@@ -13,6 +15,8 @@ function Signup(props) {
   const [validUsername, setValidUsername] = React.useState(false)
 
   let tooShortUsernameInput = document.querySelector(".input-username");
+
+  let navigate = useNavigate()
   
   function verifyGoogleAccount(){
     if (username.length < 3) return tooShortUsernameInput.classList.add("error")
@@ -30,6 +34,7 @@ function Signup(props) {
         // ...
         props.setUser(username)
         props.setLoggedIn(true)
+        navigate("../")
       })
       .catch((error) => {
         // Handle Errors here.

@@ -23,11 +23,38 @@ function Main(props) {
 
   function signedInDiv(){
     return (
-      <>
-        <h2>Hello</h2>
-        <p>{props.user}</p>
-      </>
-    )
+      <div className="your-profile-info-container">
+        <div className="yourprofileinnercontainer">
+          <div className="yourinfo-container-image">
+            <img src={image} className="yourinfo-image"></img>
+          </div>
+          <div className="yourinfo-text">
+            <h2>Hello</h2>
+            <p>{props.user}</p>
+          </div>
+        </div>
+        <div className="yourinfo--footer">
+          <div className="following">
+            <p>1</p>
+            <p>Following</p>
+          </div>
+          <div className="followers">
+            <p>0</p>
+            <p>Followers</p>
+          </div>
+          <div className="yourposts">
+            <p>0</p>
+            <p>Posts</p>
+          </div>
+          <div className="makenewpost">
+            <p>
+              <i class="fa-solid fa-plus"></i>
+            </p>
+            <p>New Post</p>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   function createPosts(post){
