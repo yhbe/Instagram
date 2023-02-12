@@ -4,6 +4,7 @@ import defBgImg from "/defaultprofilebackground.jpg"
 import style from "./UserPage.css"
 import Button from '../components/Button'
 
+
 function User(props) {
     let path = window.location.pathname
     path = path.split("/")
@@ -17,7 +18,15 @@ function User(props) {
       } else false
     })
 
-    console.log(userPosts)
+    function showPostPreview(post){
+      return (
+        <div className='postpreview--main-container'>
+        <img className='postpreview-image' src={post.post} alt="instagram post" />
+        </div>
+      )
+    }
+
+    userPosts = userPosts.map(post => showPostPreview(post))
 
     function createUserProfile(){
       return (
@@ -53,23 +62,23 @@ function User(props) {
             </div>
           </div>
           <div className="userbottom--half-container">
-   <div className="moreuserinformationo--posts--container">
+            <div className="moreuserinformationo--posts--container">
               <div className="userinformation--container">
                 <h1 className="userprofile-name">{userProfile.name}</h1>
                 <p className="userprofile--domain">@{userProfile.domain}</p>
                 <div className="amount-of-posts larger">
-                  <h4 className='large'>6</h4>
+                  <h4 className="large">6</h4>
                   <p className="post-text">Posts</p>
                 </div>
                 <hr />
                 <div className="following--followers-container larger">
                   <div className="following">
                     <p className="following--amount large">5</p>
-                    <p className="following-text">Following</p>
+                    <p className="following-text post-text">Following</p>
                   </div>
                   <div className="followers larger">
                     <p className="follower--amount large">213</p>
-                    <p className="followers-text">Followers</p>
+                    <p className="followers-text post-text">Followers</p>
                   </div>
                 </div>
                 <hr />
@@ -79,11 +88,8 @@ function User(props) {
                 </div>
               </div>
             </div>
-          <div className="posts--container">
-            Here
+            <div className="posts--main-container">{userPosts}</div>
           </div>
-          </div>
-    
         </>
       );
     }
