@@ -11,8 +11,11 @@ export default function createPosts(post,goToProfile) {
             className="post--profile-picture"
             src={post.profilepicture}
           ></img>
-          <div className="header-left-text">
-            <p onClick={(event) => goToProfile(event)}>{post.username}</p>
+          <div
+            onClick={(event) => goToProfile(event)}
+            className="header-left-text"
+          >
+            <p>{post.username}</p>
             <p className="user-domain">@{post.domain}</p>
           </div>
         </div>
