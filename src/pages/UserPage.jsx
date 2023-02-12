@@ -33,7 +33,7 @@ function User(props) {
       return (
         <>
           <div className="createUserProfile--Container">
-            <Navbar />
+            <Navbar user={props.user}/>
             <div className="headerimage--container">
               <img
                 className="user-header-background-image"

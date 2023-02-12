@@ -45,7 +45,11 @@ function Navbar(props) {
 
   function goToUserPage(){
     if (props.user){
-      navigate(`../user/${props.user}`)
+      console.log("goign!")
+      navigate("../")
+      setTimeout(() => {
+        navigate(`../user/${props.user}`);
+      }, "1 second");
     } else {
       navigate(`../signup`);
     }

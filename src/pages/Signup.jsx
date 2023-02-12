@@ -71,7 +71,7 @@ function Signup(props) {
 
   return (
     <div className='signup--main'>
-    <Navbar />
+    <Navbar user={props.user}/>
     <div className='signup--content-div'>
     <div className='signup--content-inner-div'>
       <div className='logo-text-div'>

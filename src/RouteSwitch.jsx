@@ -41,10 +41,25 @@ function RouteSwitch() {
       <Routes>
         <Route
           path="/"
-          element={<Main loggedIn={loggedIn} setLoggedIn={setLoggedIn} user={user} posts={posts}/>}
+          element={
+            <Main
+              loggedIn={loggedIn}
+              setLoggedIn={setLoggedIn}
+              user={user}
+              posts={posts}
+            />
+          }
         />
-        <Route path="/signup" element={<Signup setLoggedIn={setLoggedIn} setUser={setUser}/>} />
-        <Route path="/user/:userId" element={<UserPage allUsers={allUsers} posts={posts}/>} />
+        <Route
+          path="/signup"
+          element={
+            <Signup setLoggedIn={setLoggedIn} setUser={setUser} user={user} />
+          }
+        />
+        <Route
+          path="/user/:userId"
+          element={<UserPage allUsers={allUsers} posts={posts} user={user} />}
+        />
       </Routes>
     </BrowserRouter>
   );
