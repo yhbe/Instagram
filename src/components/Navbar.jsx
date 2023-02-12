@@ -25,7 +25,7 @@ function Navbar() {
   function createButtons(){
     return (
       <ul className="buttons-ul">
-        <li><i className="fa-sharp fa-solid fa-house-chimney"></i></li>
+        <li><i onClick={() => homePage()} className="fa-sharp fa-solid fa-house-chimney"></i></li>
         <li> <i className="fa-regular fa-comment"></i></li>
         <li><i className="fa-regular fa-heart"></i></li>
         <li><i className="fa-regular fa-user"></i></li>
@@ -36,7 +36,6 @@ function Navbar() {
   let navigate = useNavigate();
   function homePage(){
     navigate("../")
-
   }
 
   return (
