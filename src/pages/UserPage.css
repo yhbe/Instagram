@@ -1,9 +1,12 @@
 .createUserProfile--Container{
-  background-color: rgb(241, 241, 241);
+  /* background-color: rgb(241, 241, 241); */
 }
+
 .headerimage--container{
+  position: absolute;
+  top: 0;
   width: 100vw;
-  height: 265px;
+  height: 365px;
 }
 
 .user-header-background-image{
@@ -14,16 +17,18 @@
 }
 
 .profile-pic--interact-share{
+  position: relative;
   display: flex;
   align-items: center;
   width: 90%;
   margin: auto;
+  margin-top: 200px;
   justify-content: space-between;
 }
 
 .profilePictureContainer{
-  height: 255px;
-  width: 255px;
+  height: 205px;
+  width: 205px;
 }
 
 .profile-picture{
@@ -36,4 +41,51 @@
 
 .interact-share--container{
   display: flex;
+}
+
+.userbottom--half-container{
+  display: flex;
+  align-items: center;
+  width: 90%;
+  margin: auto;
+}
+
+.moreuserinformationo--posts--container{
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  width: 275px;
+}
+
+.userinformation--container{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 255px;
+}
+
+.userprofile--domain{
+  font-size: 1.3rem;
+  color: gray;
+  margin-top: -8px;
+}
+
+
+.amount-of-posts{
+  display: flex;
+  align-items: center;
+}
+
+.post-text{
+  color: gray;
+}
+
+.larger{
+  font-size: 1.2rem;
+}
+
+.large{
+  font-weight: bolder;
+  font-size: 1.3rem;
+  margin-right: 5px;
 }
