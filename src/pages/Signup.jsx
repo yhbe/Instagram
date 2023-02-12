@@ -45,6 +45,10 @@ function Signup(props) {
             domain: username,
             profilepicture:
               "https://firebasestorage.googleapis.com/v0/b/instagram-38d7b.appspot.com/o/Zawantewilliams%2Fgratisography-frog-racer-free-stock-photo.jpg?alt=media&token=1e1955a1-d055-4685-8a94-0a1cbeddb46d",
+            followers: 0,
+            following: 1,
+            bio: "",
+            posts: 0
           });
         }; 
         // console.log(user.displayName)

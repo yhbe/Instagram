@@ -68,24 +68,24 @@ function User(props) {
                 <h1 className="userprofile-name">{userProfile.name}</h1>
                 <p className="userprofile--domain">@{userProfile.domain}</p>
                 <div className="amount-of-posts larger">
-                  <h4 className="large">6</h4>
+                  <h4 className="large">{userProfile.posts}</h4>
                   <p className="post-text">Posts</p>
                 </div>
                 <hr />
                 <div className="following--followers-container larger">
                   <div className="following">
-                    <p className="following--amount large">5</p>
+                    <p className="following--amount large">{userProfile.following}</p>
                     <p className="following-text post-text">Following</p>
                   </div>
                   <div className="followers larger">
-                    <p className="follower--amount large">213</p>
+                    <p className="follower--amount large">{userProfile.followers}</p>
                     <p className="followers-text post-text">Followers</p>
                   </div>
                 </div>
                 <hr />
                 <div className="bio-container larger">
                   <p className="bio-text large">Bio</p>
-                  <p className="fullbio">California</p>
+                  <p className="fullbio">{userProfile.bio}</p>
                 </div>
               </div>
             </div>
