@@ -72,7 +72,7 @@ function Main(props) {
   
   return (
     <div className="main--container">
-      <Navbar />
+      <Navbar user={props.user} />
       <div className='content--div'>
       <div className='main--content'>
       {homepagePosts}

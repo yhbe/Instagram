@@ -3,7 +3,8 @@ import React from "react";
 import { useNavigate } from 'react-router-dom';
 import instagramimage from "/instagramimage.png"
 
-function Navbar() {
+function Navbar(props) {
+  console.log("navbar user", props.user)
   const [showButtons,setShowButtons] = React.useState(false)
 
   
@@ -28,7 +29,9 @@ function Navbar() {
         <li><i onClick={() => homePage()} className="fa-sharp fa-solid fa-house-chimney"></i></li>
         <li> <i className="fa-regular fa-comment"></i></li>
         <li><i className="fa-regular fa-heart"></i></li>
-        <li><i className="fa-regular fa-user"></i></li>
+        <li><i 
+        onClick={() => goToUserPage()}
+        className="fa-regular fa-user"></i></li>
       </ul>
     );
   }
@@ -36,6 +39,16 @@ function Navbar() {
   let navigate = useNavigate();
   function homePage(){
     navigate("../")
+  }
+  
+  console.log(props.user)
+
+  function goToUserPage(){
+    if (props.user){
+      navigate(`../user/${props.user}`)
+    } else {
+      navigate(`../signup`);
+    }
   }
 
   return (

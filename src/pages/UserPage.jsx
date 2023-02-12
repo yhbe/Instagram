@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar'
 import defBgImg from "/defaultprofilebackground.jpg"
 import style from "./UserPage.css"
 import Button from '../components/Button'
+import { collection, addDoc } from "firebase/firestore";
 
 
 function User(props) {
@@ -10,7 +11,7 @@ function User(props) {
     path = path.split("/")
 
     let userProfile = path[2]
-    userProfile = props.allUsers.find(user => user.id === userProfile)
+    userProfile = props.allUsers.find(user => user.domain === userProfile)
     
     let userPosts = props.posts.filter(user => {
       if (user.domain === userProfile.id){

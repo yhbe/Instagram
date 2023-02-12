@@ -4,6 +4,9 @@ import style from "./Signup.css"
 import Button from '../components/Button'
 import image from "/instagramimage.png"
 import { useNavigate } from "react-router-dom";
+import { db } from '../services/firebase'
+import { collection, addDoc } from "firebase/firestore";
+
 
 
 
@@ -12,11 +15,14 @@ import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
 function Signup(props) {
   const [username, setUsername] = React.useState([])
-  const [validUsername, setValidUsername] = React.useState(false)
 
   let tooShortUsernameInput = document.querySelector(".input-username");
 
   let navigate = useNavigate()
+
+  //successfull signup
+    const usersCollectionRef = collection(db, "usercollection");
+
   
   function verifyGoogleAccount(){
     if (username.length < 3) return tooShortUsernameInput.classList.add("error")
@@ -32,6 +38,17 @@ function Signup(props) {
         const user = result.user;
         // IdP data available using getAdditionalUserInfo(result)
         // ...
+        console.log(user, "**")
+        const createUser = async () => {
+          await addDoc(usersCollectionRef, {
+            name: user.displayName,
+            domain: username,
+            profilepicture:
+              "https://firebasestorage.googleapis.com/v0/b/instagram-38d7b.appspot.com/o/Zawantewilliams%2Fgratisography-frog-racer-free-stock-photo.jpg?alt=media&token=1e1955a1-d055-4685-8a94-0a1cbeddb46d",
+          });
+        }; 
+        // console.log(user.displayName)
+        createUser()
         props.setUser(username)
         props.setLoggedIn(true)
         navigate("../")

@@ -34,7 +34,7 @@ function RouteSwitch() {
     };
     getAllUsers();
     getData();
-  }, []);
+  }, [user]);
 
   return (
     <BrowserRouter>
