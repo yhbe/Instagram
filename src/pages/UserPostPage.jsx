@@ -32,51 +32,59 @@ function UserPostPage(props) {
 
   let displayPost = downloadPost.find(post => post.uniqueid === postId)
 
-    const usersCollectionRef = collection(db, "users/1/usercomments");
+    const usersCollectionRef = collection(db, `users/${postId}/usercomments`);
 
     const [comments, setComments] = React.useState([])
 
     React.useEffect(() => {
       const getData = async () => {
         const data = await getDocs(usersCollectionRef);
-        setComments(data.docs.map((doc) => ({ ...doc.data()})));
+        setComments(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
       };
       getData();
     }, []);
     
     let sortUserComments;
-    let commentJsx;
+    let commentJsx = []
+
+    console.log(comments)
 
     if (comments.length > 0){
-      console.log(comments)
       sortUserComments = comments.map(comment => {
         let arr = []
         let user
-        for (let key in comment){
           user = props.allUsers.find(user => {
-            if (user.domain === key){
-              user.comment = comment[`${user.domain}`]
-              arr.push(user)
+            if (user.domain === comment.id) {
+              user.comment = comment.comments
+              arr.push(user);
             }
           })
-        }
         return arr
       })
 
-      commentJsx = sortUserComments[0].map(comment => {
-        console.log(comment.domain, "comment")
-        return createCommentJsx(comment)
+      console.log(sortUserComments)
+
+      let commentsArr = []
+
+      sortUserComments.forEach(comment => {
+        props.allUsers.find((user) => {
+          if (user.domain === comment[0].domain) {
+            commentJsx.push(comment[0].comment.map(userComment => createCommentJsx(user,userComment))) 
+          }
+        });
       })
     }
-    
-    
-    function createCommentJsx(user){
+    function createCommentJsx(user,comment){
       return (
-        <>
-        <h1>{user.domain}</h1>
-        <p>{user.comment}</p>
-        </>
-      )
+        <div className="user--comment-container">
+          <div className="user--comment-image-container">
+            <img className='user-comment-image' src={user.profilepicture} alt="profile picture" />
+          </div>
+          <strong>{user.name}</strong>
+          &nbsp;
+          <p>{comment}</p>
+        </div>
+      );
     }
 
   function createPost(){
