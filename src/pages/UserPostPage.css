@@ -8,7 +8,6 @@
 
 .post--container{
   display: flex;
-  background-color: rgb(255, 185, 255);
   height: 550px;
 }
 
@@ -60,6 +59,19 @@
   margin-bottom: 20px;
 }
 
+.image--caption{
+  display: flex;
+  margin: auto;
+}
+.ul--heart-comment-share{
+  padding-top: 10px;
+  font-size: 1.2rem;
+}
+
+.ul--heart-comment-share > *{
+  margin-right: 3px;
+}
+
 .commentsection{
   overflow-y: scroll;
   flex: 1;
@@ -67,6 +79,16 @@
 
 .commentsection::-webkit-scrollbar {
   display: none;
+}
+
+.addacomment{
+  font-size: 1rem;
+  height: 30px;
+  border: none;
+}
+
+.addacomment:focus{
+  text-indent: .5rem;
 }
 
 .user--comment-container{
@@ -79,6 +101,7 @@
 .user--comment-image-container{
   width: 35px;
   height: 35px;
+  margin-right: 5px;
 }
 
 .user-comment-image{
@@ -86,6 +109,10 @@
   height: 100%;
   border-radius: 50%;
   object-fit: cover;
+}
+
+.username--{
+  white-space: nowrap;
 }
 
 

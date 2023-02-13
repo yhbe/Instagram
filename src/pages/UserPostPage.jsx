@@ -78,9 +78,15 @@ function UserPostPage(props) {
       return (
         <div className="user--comment-container">
           <div className="user--comment-image-container">
-            <img className='user-comment-image' src={user.profilepicture} alt="profile picture" />
+            <img
+              className="user-comment-image"
+              src={user.profilepicture}
+              alt="profile picture"
+            />
           </div>
-          <strong>{user.name}</strong>
+          <p className='username--'>
+            <strong>{user.name}</strong>
+          </p>
           &nbsp;
           <p>{comment}</p>
         </div>
@@ -117,7 +123,7 @@ function UserPostPage(props) {
               </div>
               <div className="bottomhalf-half">
                 <p className="image--caption">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum quis, quae assumenda vitae expedita quas voluptates nesciunt, sapiente minima animi placeat autem cumque possimus. Veniam repellat tempore fugit dignissimos tempora.
+                  {displayPost.bio}
                 </p>
               </div>
             </div>
@@ -125,13 +131,12 @@ function UserPostPage(props) {
             <div className="commentsection">
               {commentJsx && commentJsx}
             </div>
-            <ul>
+            <ul className='ul--heart-comment-share'>
               <i class="fa-regular fa-heart"></i>
               <i class="fa-regular fa-comment"></i>
               <i class="fa-regular fa-share-from-square"></i>
             </ul>
-            <p>20 likes</p>
-            <hr />
+            <strong>20 likes</strong>
             <input
               className="addacomment"
               placeholder="Add a comment..."
