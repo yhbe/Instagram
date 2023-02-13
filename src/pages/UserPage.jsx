@@ -4,27 +4,42 @@ import defBgImg from "/defaultprofilebackground.jpg"
 import style from "./UserPage.css"
 import Button from '../components/Button'
 import { collection, addDoc } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 
 
 function User(props) {
-    let path = window.location.pathname
-    path = path.split("/")
+  let path = window.location.pathname
+  path = path.split("/")
+  
+  let userProfile = path[2]
+  userProfile = props.allUsers.find(user => user.domain === userProfile)
+  
+  let userPosts = props.posts.filter(user => {
+    if (user.domain === userProfile.id){
+      return true
+    } else false
+  })
+  
+  let navigate = useNavigate();
 
-    let userProfile = path[2]
-    userProfile = props.allUsers.find(user => user.domain === userProfile)
-    
-    let userPosts = props.posts.filter(user => {
-      if (user.domain === userProfile.id){
-        return true
-      } else false
-    })
+    function navigateUserPost(id){
+      navigate(`${id}`)
+    }
 
     function showPostPreview(post){
+      let id = post.uniqueid
       return (
-        <div className='postpreview--main-container'>
-        <img className='postpreview-image' src={post.post} alt="instagram post" />
+        <div
+          onClick={() => navigateUserPost(id)}
+          className="postpreview--main-container"
+        >
+          <img
+            className="postpreview-image"
+            src={post.post}
+            alt="instagram post"
+          />
         </div>
-      )
+      );
     }
 
     userPosts = userPosts.map(post => showPostPreview(post))

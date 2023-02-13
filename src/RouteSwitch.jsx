@@ -8,6 +8,7 @@ import React from 'react';
 import {v4} from "uuid"
 import Signup from './pages/Signup';
 import UserPage from "./pages/UserPage"
+import UserPostPage from "./pages/UserPostPage"
 
 
 function RouteSwitch() {
@@ -17,7 +18,7 @@ function RouteSwitch() {
   const [user,setUser] = React.useState(null)
 
   console.log(allUsers, "users")
-  // console.log(posts)
+  console.log(posts)
   // console.log(loggedIn,user)
   
   const allUsersCollectionRef = collection(db, "usercollection")
@@ -59,6 +60,10 @@ function RouteSwitch() {
         <Route
           path="/user/:userId"
           element={<UserPage allUsers={allUsers} posts={posts} user={user} />}
+        />
+        <Route 
+          path="/user/:userId/:postid"
+          element={<UserPostPage allUsers={allUsers} posts={posts} user={user} />}
         />
       </Routes>
     </BrowserRouter>
