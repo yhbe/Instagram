@@ -85,6 +85,8 @@
   font-size: 1rem;
   height: 30px;
   border: none;
+  flex: 1;
+  margin-right: 3px;
 }
 
 .addacomment:focus{
@@ -113,6 +115,18 @@
 
 .username--{
   white-space: nowrap;
+}
+
+.input--div{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.user-comment{
+  width: 400px;
+  word-wrap: break-word;
 }
 
 

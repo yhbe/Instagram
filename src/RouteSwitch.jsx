@@ -17,8 +17,8 @@ function RouteSwitch() {
   const [allUsers,setAllUsers] = React.useState([])
   const [user,setUser] = React.useState(null)
 
-  console.log(allUsers, "users")
-  console.log(posts)
+  // console.log(allUsers, "users")
+  // console.log(posts)
   // console.log(loggedIn,user)
   
   const allUsersCollectionRef = collection(db, "usercollection")
