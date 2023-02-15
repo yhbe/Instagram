@@ -5,9 +5,9 @@ import Navbar from "../components/Navbar"
 import { useNavigate } from 'react-router-dom';
 import image from "/more-hori.svg"
 import defaultImage from "/defaultimage.jpg"
-import createPosts from '../helper/CreatePosts';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../services/firebase';
+import createPosts from '../helper/CreatePosts';
 
 function Main(props) {
   console.log(props)
@@ -90,7 +90,8 @@ function Main(props) {
 
   let homepagePosts
   if (props.posts) {
-    homepagePosts = props.posts.map((post,index) => createPosts(post, goToProfile, postArr[index]))
+    console.log(props.posts)
+    homepagePosts = props.posts.map((post,index) => createPosts(post, goToProfile, postArr[index], navigate))
   }
   
   return (

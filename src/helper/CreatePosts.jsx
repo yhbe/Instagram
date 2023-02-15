@@ -2,19 +2,19 @@ import image from "/more-hori.svg";
 import { useNavigate } from "react-router-dom";
 
 
-export default function createPosts(post,goToProfile, postArr) {
-  let newestPost = false
-  let secondNewestPost = false
-  
-  if (postArr){
-    postArr = postArr.sort((a,b) => {
-      if (a.time > b.time){
-        return 1
-      } 
-    })
-    console.log(postArr, "**:P")
-    newestPost = postArr.at(0); 
-    secondNewestPost = postArr.at(1); 
+export default function createPosts(post, goToProfile, postArr, navigate) {
+  let newestPost = false;
+  let secondNewestPost = false;
+
+  if (postArr) {
+    postArr = postArr.sort((a, b) => {
+      if (a.time > b.time) {
+        return 1;
+      }
+    });
+    console.log(postArr, "**:P");
+    newestPost = postArr.at(0);
+    secondNewestPost = postArr.at(1);
   }
 
   return (
@@ -36,7 +36,11 @@ export default function createPosts(post,goToProfile, postArr) {
         <img src={image}></img>
       </div>
       <div className="instagram--post-image">
-        <img className="image" src={post.post}></img>
+        <img
+          onClick={() => navigate(`./user/${post.domain}/${post.uniqueid}`)}
+          className="image"
+          src={post.post}
+        ></img>
       </div>
       <div className="instagram--post-footer">
         <div className="interact-row">
@@ -54,13 +58,14 @@ export default function createPosts(post,goToProfile, postArr) {
             {postArr && (
               <>
                 {newestPost && (
-                    <p>
-                      <strong>{newestPost.domain}</strong> {newestPost.comment}
-                    </p>
+                  <p>
+                    <strong>{newestPost.domain}</strong> {newestPost.comment}
+                  </p>
                 )}
                 {secondNewestPost && (
                   <p>
-                    <strong>{secondNewestPost.domain}</strong> {secondNewestPost.comment}
+                    <strong>{secondNewestPost.domain}</strong>{" "}
+                    {secondNewestPost.comment}
                   </p>
                 )}
               </>
