@@ -9,12 +9,12 @@ export default function createPosts(post, goToProfile, postArr, navigate) {
   if (postArr) {
     postArr = postArr.sort((a, b) => {
       if (a.time > b.time) {
-        return 1;
-      }
+        return -1;
+      } else return 1
     });
     console.log(postArr, "**:P");
-    newestPost = postArr.at(0);
-    secondNewestPost = postArr.at(1);
+    newestPost = postArr.at(1); 
+    secondNewestPost = postArr.at(0);
   }
 
   return (

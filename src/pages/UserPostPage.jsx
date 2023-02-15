@@ -37,7 +37,9 @@ function UserPostPage(props) {
       setComments(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     }
 
-    React.useEffect(() => {fetchComments()}, []);
+    React.useEffect(() => {
+      fetchComments()
+    }, []);
 
     
     let sortUserComments;
@@ -45,6 +47,12 @@ function UserPostPage(props) {
     let commentJsx = []
 
     if (comments.length > 0){
+      comments.sort((a, b) => {
+        console.log(a, b);
+        if (a.time > b.time) {
+          return 1;
+        } else return -1;
+      });
       comments.map(comment => {
         props.allUsers.find((user) => {
           if (user.domain === comment.domain) {
