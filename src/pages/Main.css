@@ -122,6 +122,10 @@
   margin-top: 2px;
 }
 
+.twoComments{
+  overflow: hidden;
+}
+
 .view-all-comments{
   color: rgba(138, 138, 138, 0.842);
 }

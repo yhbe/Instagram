@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 
 
 function UserPostPage(props) {
-  console.log(props.user)
   let path = window.location.pathname;
   path = path.split("/")
   let postId = path[3]
@@ -18,14 +17,12 @@ function UserPostPage(props) {
 
   const resetData = async () => {
     const data = await getDocs(usersPostCollectionRef);
-    console.log(data, data);
     setDownloadPost(data.docs.map((doc) => ({ ...doc.data() })));
   }
 
   React.useEffect(() => {resetData()}, []);
   
 
-  console.log(downloadPost)
   //
 
   let displayPost = downloadPost.find(post => post.uniqueid === postId)
@@ -46,7 +43,6 @@ function UserPostPage(props) {
     let sortUserComments;
     
     let commentJsx = []
-    console.log(comments)
 
     if (comments.length > 0){
       comments.map(comment => {
@@ -55,7 +51,6 @@ function UserPostPage(props) {
             comment.name = user.name
             comment.profilepicture = user.profilepicture
             return commentJsx.push(createCommentJsx(comment));
-            // arr.push(user);
           }
         });
       })
@@ -72,7 +67,7 @@ function UserPostPage(props) {
             />
           </div>
           <p className='username--'>
-            <strong>{user.name}</strong>
+            <strong>{user.domain}</strong>
           </p>
           &nbsp;
           <p className='user-comment'>{user.comment}</p>
@@ -91,6 +86,7 @@ function UserPostPage(props) {
         `users/${postId}/usercomments/`
       );
       await addDoc(usersCommentsCollectionRef, {
+        time: Date.now(),
         comment: `${userComment}`,
         domain: `${props.user}`
       });

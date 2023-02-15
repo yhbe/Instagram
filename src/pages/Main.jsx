@@ -6,9 +6,12 @@ import { useNavigate } from 'react-router-dom';
 import image from "/more-hori.svg"
 import defaultImage from "/defaultimage.jpg"
 import createPosts from '../helper/CreatePosts';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../services/firebase';
 
 function Main(props) {
-  let [signUpButtonClick, setSignUpButtonClick] = React.useState(false)
+  console.log(props)
+  console.log(props.posts)
 
   let navigate = useNavigate();
 
@@ -22,6 +25,26 @@ function Main(props) {
   function login(){
     console.log("Logging in")
   }
+
+  const [postArr, setPostArr] = React.useState([])
+  React.useEffect(() => {
+    props.posts.forEach(post => {
+      const usersCollectionRef = collection(db, `users/${post.uniqueid}/usercomments`);
+      const fetchComments = async () => {
+        const data = await getDocs(usersCollectionRef);
+        setPostArr(prevState => {
+          return [
+            ...prevState,
+            data.docs.map((doc) => ({ ...doc.data(), id: doc.id })),
+          ];
+        }) ;
+        console.log("GETTING!!", postArr)
+      };
+      fetchComments()
+    })
+  }, [props])
+
+  console.log(postArr, "**** :P")
 
   function signedInDiv(){
     return (
@@ -67,7 +90,7 @@ function Main(props) {
 
   let homepagePosts
   if (props.posts) {
-    homepagePosts = props.posts.map(post => createPosts(post, goToProfile))
+    homepagePosts = props.posts.map((post,index) => createPosts(post, goToProfile, postArr[index]))
   }
   
   return (

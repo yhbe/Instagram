@@ -2,7 +2,21 @@ import image from "/more-hori.svg";
 import { useNavigate } from "react-router-dom";
 
 
-export default function createPosts(post,goToProfile) {
+export default function createPosts(post,goToProfile, postArr) {
+  let newestPost = false
+  let secondNewestPost = false
+  
+  if (postArr){
+    postArr = postArr.sort((a,b) => {
+      if (a.time > b.time){
+        return 1
+      } 
+    })
+    console.log(postArr, "**:P")
+    newestPost = postArr.at(0); 
+    secondNewestPost = postArr.at(1); 
+  }
+
   return (
     <div id={post.domain} className="instagram--post">
       <div className="instagram--post-header">
@@ -36,12 +50,22 @@ export default function createPosts(post,goToProfile) {
         <p className="likes">54 Likes</p>
         <div className="comments--row">
           <p className="view-all-comments">View All Comments</p>
-          <p>
-            <strong>samCho</strong> Great Picture
-          </p>
-          <p>
-            <strong>ryanlyn</strong> We had a great night!
-          </p>
+          <div className="twoComments">
+            {postArr && (
+              <>
+                {newestPost && (
+                    <p>
+                      <strong>{newestPost.domain}</strong> {newestPost.comment}
+                    </p>
+                )}
+                {secondNewestPost && (
+                  <p>
+                    <strong>{secondNewestPost.domain}</strong> {secondNewestPost.comment}
+                  </p>
+                )}
+              </>
+            )}
+          </div>
         </div>
       </div>
     </div>
