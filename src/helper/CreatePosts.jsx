@@ -32,6 +32,26 @@ export default function createPosts(post, goToProfile, postArr, navigate, setCom
     refreshPage()
   };
 
+
+  let inputs = document.querySelectorAll(".addacomment-input");
+
+  if (inputs) {
+    inputs.forEach((input) =>
+      input.addEventListener("keydown", submitInputComment)
+    );
+  }
+
+  function submitInputComment(event) {
+    if (event.key === "Enter") {
+      setCommentsToPost([])
+      postComment();
+    } else {
+      inputs.forEach((input) =>
+        input.removeEventListener("keydown", submitInputComment)
+      );
+    }
+  }
+
   return (
     <div id={post.domain} className="instagram--post">
       <div className="instagram--post-header">
@@ -73,12 +93,22 @@ export default function createPosts(post, goToProfile, postArr, navigate, setCom
             {postArr && (
               <>
                 {newestPost && (
-                  <p>
+                  <p
+                    className="post"
+                    onClick={() =>
+                      navigate(`../user/${secondNewestPost.domain}`)
+                    }
+                  >
                     <strong>{newestPost.domain}</strong> {newestPost.comment}
                   </p>
                 )}
                 {secondNewestPost && (
-                  <p>
+                  <p
+                    className="post"
+                    onClick={() =>
+                      navigate(`../user/${secondNewestPost.domain}`)
+                    }
+                  >
                     <strong>{secondNewestPost.domain}</strong>{" "}
                     {secondNewestPost.comment}
                   </p>
@@ -91,12 +121,17 @@ export default function createPosts(post, goToProfile, postArr, navigate, setCom
               className="addacomment-input"
               type="text"
               placeholder="Add a comment..."
-              onChange={(event) => setCommentsToPost(prevState => {
-                let a = prevState.filter(state => state.id !== post.id)
-                return [...a, {comment : event.target.value, id:  post.uniqueid} ]
-              })}
+              onChange={(event) =>
+                setCommentsToPost((prevState) => {
+                  let a = prevState.filter((state) => state.id !== post.id);
+                  return [
+                    ...a,
+                    { comment: event.target.value, id: post.uniqueid },
+                  ];
+                })
+              }
             />
-            <i  
+            <i
               onClick={() => postComment()}
               class="fa-solid fa-paper-plane"
             ></i>

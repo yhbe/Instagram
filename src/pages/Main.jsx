@@ -61,7 +61,8 @@ function Main(props) {
         };
         fetchComments();
       });
-      let inputs = document.querySelectorAll(".addacomment-input").forEach(input => input.value = "");
+      let inputs = document.querySelectorAll(".addacomment-input");
+      inputs.forEach(input => input.value = "");
   }
 
 

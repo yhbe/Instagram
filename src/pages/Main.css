@@ -193,6 +193,12 @@
   }
 }
 
+.post{
+  cursor: pointer;
+}
+
+
+
 @media screen and (max-width: 960px) {
   .content--div{
     display: flex;
