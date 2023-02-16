@@ -1,8 +1,9 @@
 import image from "/more-hori.svg";
-import { useNavigate } from "react-router-dom";
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "../services/firebase";
 
 
-export default function createPosts(post, goToProfile, postArr, navigate) {
+export default function createPosts(post, goToProfile, postArr, navigate, setCommentsToPost, commentsToPost, user, refreshPage) {
   let newestPost = false;
   let secondNewestPost = false;
 
@@ -12,10 +13,24 @@ export default function createPosts(post, goToProfile, postArr, navigate) {
         return -1;
       } else return 1
     });
-    console.log(postArr, "**:P");
     newestPost = postArr.at(1); 
     secondNewestPost = postArr.at(0);
   }
+
+  const postComment = async () => {
+    let commentToPost = commentsToPost.filter(comment => comment.id === post.id)
+    if (!user) return navigate("../signup");
+    const usersCommentsCollectionRef = collection(
+      db,
+      `users/${post.id}/usercomments/`
+    );
+    await addDoc(usersCommentsCollectionRef, {
+      time: Date.now(),
+      comment: `${commentToPost[0].comment}`,
+      domain: `${user}`,
+    });
+    refreshPage()
+  };
 
   return (
     <div id={post.domain} className="instagram--post">
@@ -70,6 +85,21 @@ export default function createPosts(post, goToProfile, postArr, navigate) {
                 )}
               </>
             )}
+          </div>
+          <div className="addacomment-input-div">
+            <input
+              className="addacomment-input"
+              type="text"
+              placeholder="Add a comment..."
+              onChange={(event) => setCommentsToPost(prevState => {
+                let a = prevState.filter(state => state.id !== post.id)
+                return [...a, {comment : event.target.value, id:  post.uniqueid} ]
+              })}
+            />
+            <i  
+              onClick={() => postComment()}
+              class="fa-solid fa-paper-plane"
+            ></i>
           </div>
         </div>
       </div>

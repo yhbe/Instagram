@@ -48,7 +48,6 @@ function UserPostPage(props) {
 
     if (comments.length > 0){
       comments.sort((a, b) => {
-        console.log(a, b);
         if (a.time > b.time) {
           return 1;
         } else return -1;
@@ -86,7 +85,6 @@ function UserPostPage(props) {
     const [userComment, setUserComment] = React.useState([])
 
     let navigate = useNavigate()
-    let updatedPost = false
     const postComment = async () => {
       if (!props.user) return navigate("../signup")
       const usersCommentsCollectionRef = collection(

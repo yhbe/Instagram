@@ -10,8 +10,8 @@ import { db } from '../services/firebase';
 import createPosts from '../helper/CreatePosts';
 
 function Main(props) {
-  console.log(props)
-  console.log(props.posts)
+
+  const [commentsToPost, setCommentsToPost] = React.useState([])
 
   let navigate = useNavigate();
 
@@ -38,13 +38,32 @@ function Main(props) {
             data.docs.map((doc) => ({ ...doc.data(), id: doc.id })),
           ];
         }) ;
-        console.log("GETTING!!", postArr)
       };
       fetchComments()
     })
   }, [props])
 
-  console.log(postArr, "**** :P")
+  function refreshPage() {
+    setPostArr([])
+      props.posts.forEach((post) => {
+        const usersCollectionRef = collection(
+          db,
+          `users/${post.uniqueid}/usercomments`
+        );
+        const fetchComments = async () => {
+          const data = await getDocs(usersCollectionRef);
+          setPostArr((prevState) => {
+            return [
+              ...prevState,
+              data.docs.map((doc) => ({ ...doc.data(), id: doc.id })),
+            ];
+          });
+        };
+        fetchComments();
+      });
+      let inputs = document.querySelectorAll(".addacomment-input").forEach(input => input.value = "");
+  }
+
 
   function signedInDiv(){
     return (
@@ -90,8 +109,7 @@ function Main(props) {
 
   let homepagePosts
   if (props.posts) {
-    console.log(props.posts)
-    homepagePosts = props.posts.map((post,index) => createPosts(post, goToProfile, postArr[index], navigate))
+    homepagePosts = props.posts.map((post,index) => createPosts(post, goToProfile, postArr[index], navigate,setCommentsToPost, commentsToPost, props.user, refreshPage))
   }
   
   return (

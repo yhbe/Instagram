@@ -40,7 +40,7 @@
   height: 650px;
   background-color: gray;
   margin-top: 10px;
-  margin-bottom: 17px;
+  margin-bottom: 100px;
   border-radius: 10px;
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.377);
   transition: all 1s;
@@ -167,6 +167,24 @@
   object-fit: cover;
   object-position: center;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.514);
+}
+
+.addacomment-input-div{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.addacomment-input{
+  display: flex;
+    width: 100%;
+    border: none;
+    height: 25px;
+    font-size: 1rem;
+}
+
+.addacomment-input:focus{
+  text-indent: 1rem;
 }
 
 @media screen and (min-width: 961px) {
