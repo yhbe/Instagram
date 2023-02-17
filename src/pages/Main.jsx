@@ -1,16 +1,14 @@
+import "./Main.css"
 import React from 'react'
-import styles from "./Main.css"
 import Button from '../components/Button';
 import Navbar from "../components/Navbar"
-import { useNavigate } from 'react-router-dom';
-import image from "/more-hori.svg"
 import defaultImage from "/defaultimage.jpg"
-import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../services/firebase';
+import { useNavigate } from 'react-router-dom';
 import createPosts from '../helper/CreatePosts';
+import { collection, getDocs } from 'firebase/firestore';
 
 function Main(props) {
-
   const [commentsToPost, setCommentsToPost] = React.useState([])
 
   let navigate = useNavigate();
@@ -25,46 +23,6 @@ function Main(props) {
   function login(){
     console.log("Logging in")
   }
-
-  const [postArr, setPostArr] = React.useState([])
-  React.useEffect(() => {
-    props.posts.forEach(post => {
-      const usersCollectionRef = collection(db, `users/${post.uniqueid}/usercomments`);
-      const fetchComments = async () => {
-        const data = await getDocs(usersCollectionRef);
-        setPostArr(prevState => {
-          return [
-            ...prevState,
-            data.docs.map((doc) => ({ ...doc.data(), id: doc.id })),
-          ];
-        }) ;
-      };
-      fetchComments()
-    })
-  }, [props])
-
-  function refreshPage() {
-    setPostArr([])
-      props.posts.forEach((post) => {
-        const usersCollectionRef = collection(
-          db,
-          `users/${post.uniqueid}/usercomments`
-        );
-        const fetchComments = async () => {
-          const data = await getDocs(usersCollectionRef);
-          setPostArr((prevState) => {
-            return [
-              ...prevState,
-              data.docs.map((doc) => ({ ...doc.data(), id: doc.id })),
-            ];
-          });
-        };
-        fetchComments();
-      });
-      let inputs = document.querySelectorAll(".addacomment-input");
-      inputs.forEach(input => input.value = "");
-  }
-
 
   function signedInDiv(){
     return (
@@ -110,7 +68,18 @@ function Main(props) {
 
   let homepagePosts
   if (props.posts) {
-    homepagePosts = props.posts.map((post,index) => createPosts(post, goToProfile, postArr[index], navigate,setCommentsToPost, commentsToPost, props.user, refreshPage))
+    homepagePosts = props.posts.map((post, index) =>
+      createPosts(
+        post,
+        goToProfile,
+        props.eachPostComments[index],
+        navigate,
+        setCommentsToPost,
+        commentsToPost,
+        props.user,
+        props.refreshPage
+      )
+    );
   }
   
   return (
