@@ -17,20 +17,28 @@ export default function createPosts(post, goToProfile, postArr, navigate, setCom
     secondNewestPost = postArr.at(0);
   }
 
-  const postComment = async () => {
-    let commentToPost = commentsToPost.filter(comment => comment.id === post.id)
-    if (!user) return navigate("../signup");
-    const usersCommentsCollectionRef = collection(
-      db,
-      `users/${post.id}/usercomments/`
+  function postComment(){
+    let commentToPost = commentsToPost.filter(
+      (comment) => comment.id === post.id
     );
-    await addDoc(usersCommentsCollectionRef, {
-      time: Date.now(),
-      comment: `${commentToPost[0].comment}`,
-      domain: `${user}`,
-    });
-    refreshPage()
-  };
+    if (!commentToPost[0]) return
+    let uploadComment = commentToPost[0].comment;
+    const postCommentToDataBase = async () => {
+      if (!user) return navigate("../signup");
+      const usersCommentsCollectionRef = collection(
+        db,
+        `users/${post.id}/usercomments/`
+      );
+      await addDoc(usersCommentsCollectionRef, {
+        time: Date.now(),
+        comment: `${uploadComment}`,
+        domain: `${user}`,
+      });
+      refreshPage();
+    };
+    postCommentToDataBase()
+  }
+
 
 
   let inputs = document.querySelectorAll(".addacomment-input");
