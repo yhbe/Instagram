@@ -77,7 +77,8 @@ function Main(props) {
         setCommentsToPost,
         commentsToPost,
         props.user,
-        props.refreshPage
+        props.refreshPage,
+        props.usersLikedPosts
       )
     );
   }

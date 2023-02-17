@@ -1,11 +1,12 @@
 import image from "/more-hori.svg";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, setDoc, doc } from "firebase/firestore";
 import { db } from "../services/firebase";
 
 
-export default function createPosts(post, goToProfile, postArr, navigate, setCommentsToPost, commentsToPost, user, refreshPage) {
+export default function createPosts(post, goToProfile, postArr, navigate, setCommentsToPost, commentsToPost, user, refreshPage, usersLikedPosts) {
   let newestPost = false;
   let secondNewestPost = false;
+  let interactedUserPost 
 
   if (postArr) {
     postArr = postArr.sort((a, b) => {
@@ -15,6 +16,11 @@ export default function createPosts(post, goToProfile, postArr, navigate, setCom
     });
     newestPost = postArr.at(1); 
     secondNewestPost = postArr.at(0);
+  }
+
+  let hearted
+  if (usersLikedPosts){
+    interactedUserPost = usersLikedPosts.filter(userlikedpost => userlikedpost.id === post.id)
   }
 
   function postComment(){
@@ -60,6 +66,26 @@ export default function createPosts(post, goToProfile, postArr, navigate, setCom
     }
   }
 
+  function updatePostHeartDatabase(){
+    if (interactedUserPost.length === 0){
+      hearted = false
+    } else hearted = interactedUserPost[0].hearted;
+
+    const updatePostHeart = async () => {
+      if (!user) return navigate("../signup");
+      await setDoc(doc(db, `usercollection/${user}/likes`, `${post.id}`), {
+        hearted: !hearted,
+      });
+    };
+    updatePostHeart();
+    refreshPage();
+  }
+
+  if (interactedUserPost.length === 0) {
+    hearted = false;
+  } else hearted = interactedUserPost[0].hearted;
+
+
   return (
     <div id={post.domain} className="instagram--post">
       <div className="instagram--post-header">
@@ -88,7 +114,17 @@ export default function createPosts(post, goToProfile, postArr, navigate, setCom
       <div className="instagram--post-footer">
         <div className="interact-row">
           <div className="heart-comment-share">
-            <i class="fa-regular fa-heart"></i>
+            {hearted ? (
+              <i
+                onClick={() => updatePostHeartDatabase()}
+                class="fa-solid fa-heart"
+              ></i>
+            ) : (
+              <i
+                onClick={() => updatePostHeartDatabase()}
+                class="fa-regular fa-heart"
+              ></i>
+            )}
             <i class="fa-regular fa-comment"></i>
             <i class="fa-regular fa-share-from-square"></i>
           </div>

@@ -14,9 +14,12 @@ function RouteSwitch() {
   const [posts, setPosts] = React.useState([])
   const [allUsers,setAllUsers] = React.useState([])
   const [loggedIn, setLoggedIn] = React.useState(false);
+  const [usersLikedPosts, setUsersLikedPosts] = React.useState([])
   
+
   const allUsersCollectionRef = collection(db, "usercollection")
   const usersCollectionRef = collection(db, "users");
+  const likedPostsCollectionRef = collection(db, `usercollection/${user}/likes`)
 
   React.useEffect(() => {
     const getAllUsers = async () => {
@@ -27,9 +30,16 @@ function RouteSwitch() {
       const data = await getDocs(usersCollectionRef);
       setPosts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
+    const getAllUserLikes = async() => {
+      const data = await getDocs(likedPostsCollectionRef);
+      setUsersLikedPosts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    }
     getAllUsers();
     getData();
+    getAllUserLikes()
   }, [user]);
+
+  console.log(usersLikedPosts)
 
   const [eachPostComments, setEachPostComments] = React.useState([])
 
@@ -53,6 +63,13 @@ function RouteSwitch() {
   }, [posts])
   
   function refreshPage() {
+    const getAllUserLikes = async () => {
+      const data = await getDocs(likedPostsCollectionRef);
+      setUsersLikedPosts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    };
+
+    getAllUserLikes();
+
     setEachPostComments([]);
     posts.forEach((post) => {
       const usersCollectionRef = collection(
@@ -86,8 +103,9 @@ function RouteSwitch() {
               user={user}
               posts={posts}
               eachPostComments={eachPostComments}
-              setEachPostComments={setEachPostComments}  
-              refreshPage={refreshPage}  
+              setEachPostComments={setEachPostComments}
+              refreshPage={refreshPage}
+              usersLikedPosts={usersLikedPosts}
             />
           }
         />
@@ -95,18 +113,20 @@ function RouteSwitch() {
           path="/signup"
           element={
             <Signup setLoggedIn={setLoggedIn} setUser={setUser} user={user} />
-          }  
+          }
         />
         <Route
           path="/user/:userId"
           element={<UserPage allUsers={allUsers} posts={posts} user={user} />}
         />
-        <Route 
+        <Route
           path="/user/:userId/:postid"
-          element={<UserPostPage allUsers={allUsers} posts={posts} user={user} />}    
+          element={
+            <UserPostPage allUsers={allUsers} posts={posts} user={user} />
+          }
         />
       </Routes>
-    </BrowserRouter>    
+    </BrowserRouter>
   );
 }  
 
