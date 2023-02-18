@@ -3,7 +3,7 @@ import { collection, addDoc, setDoc, doc } from "firebase/firestore";
 import { db } from "../services/firebase";
 
 
-export default function createPosts(post, goToProfile, postArr, navigate, setCommentsToPost, commentsToPost, user, refreshPage, usersLikedPosts) {
+export default function createPosts(post, goToProfile, postArr, navigate, setCommentsToPost, commentsToPost, user, refreshPage, usersLikedPosts, updateLikedBy) {
   let newestPost = false;
   let secondNewestPost = false;
   let interactedUserPost 
@@ -76,9 +76,9 @@ export default function createPosts(post, goToProfile, postArr, navigate, setCom
       await setDoc(doc(db, `usercollection/${user}/likes`, `${post.id}`), {
         hearted: !hearted,
       });
+      refreshPage();
     };
     updatePostHeart();
-    refreshPage();
   }
 
   if (interactedUserPost.length === 0) {
@@ -130,7 +130,7 @@ export default function createPosts(post, goToProfile, postArr, navigate, setCom
           </div>
           <i class="fa-solid fa-link"></i>
         </div>
-        <p className="likes">54 Likes</p>
+        <p className="likes">{post.likes} Likes</p>
         <div className="comments--row">
           <p className="view-all-comments">View All Comments</p>
           <div className="twoComments">

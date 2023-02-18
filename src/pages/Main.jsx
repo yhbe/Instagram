@@ -78,7 +78,8 @@ function Main(props) {
         commentsToPost,
         props.user,
         props.refreshPage,
-        props.usersLikedPosts
+        props.usersLikedPosts,
+        props.updateLikedBy,
       )
     );
   }

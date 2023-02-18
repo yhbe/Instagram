@@ -6,7 +6,7 @@ import Signup from './pages/Signup';
 import UserPage from "./pages/UserPage"
 import UserPostPage from "./pages/UserPostPage"
 import { BrowserRouter, Routes, Route} from "react-router-dom";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, doc, getDocs, setDoc } from "firebase/firestore";
 
 
 function RouteSwitch() {
@@ -39,7 +39,6 @@ function RouteSwitch() {
     getAllUserLikes()
   }, [user]);
 
-  console.log(usersLikedPosts)
 
   const [eachPostComments, setEachPostComments] = React.useState([])
 
@@ -91,6 +90,41 @@ function RouteSwitch() {
     inputs.forEach((input) => (input.value = ""));
   }
 
+  React.useEffect(() => {
+    updateLikedBy()
+  }, [usersLikedPosts])
+  
+  function updateLikedBy(){
+    posts.forEach(post => {
+      usersLikedPosts.forEach(likedPost => {
+        if (likedPost.id === post.uniqueid) {
+          console.log(likedPost.id.slice(0,4), likedPost.hearted)
+          if (!likedPost.hearted) {
+            post.likes = post.likes - 1;
+            post.likedby.splice(post.likedby.findIndex(person => person === user), 1)
+            const removeLikes = async () => {
+              const data = await getDocs(usersCollectionRef);
+              setDoc(doc(db, `users/${post.uniqueid}`), {
+                ...post,
+              });
+            };
+            removeLikes();
+          } else {
+            post.likes = post.likes + 1
+            post.likedby.push(user)
+            const updateLikes = async () => {
+              const data = await getDocs(usersCollectionRef);
+                setDoc(doc(db, `users/${post.uniqueid}`,), {
+                  ...post,
+                })
+            };
+            updateLikes();
+          }
+        }
+      })
+    })
+  }
+
   return (
     <BrowserRouter>
       <Routes>
@@ -106,6 +140,7 @@ function RouteSwitch() {
               setEachPostComments={setEachPostComments}
               refreshPage={refreshPage}
               usersLikedPosts={usersLikedPosts}
+              updateLikedBy={updateLikedBy}
             />
           }
         />
