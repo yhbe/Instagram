@@ -66,6 +66,7 @@ function Main(props) {
       navigate(`/user/${id}`)
   }
 
+  const [locked,setLocked] = React.useState(false)
   let homepagePosts
   if (props.posts) {
     homepagePosts = props.posts.map((post, index) =>
@@ -80,6 +81,8 @@ function Main(props) {
         props.refreshPage,
         props.usersLikedPosts,
         props.updateLikedBy,
+        setLocked,
+        locked
       )
     );
   }

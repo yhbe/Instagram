@@ -3,7 +3,7 @@ import { collection, addDoc, setDoc, doc } from "firebase/firestore";
 import { db } from "../services/firebase";
 
 
-export default function createPosts(post, goToProfile, postArr, navigate, setCommentsToPost, commentsToPost, user, refreshPage, usersLikedPosts, updateLikedBy) {
+export default function createPosts(post, goToProfile, postArr, navigate, setCommentsToPost, commentsToPost, user, refreshPage, usersLikedPosts, updateLikedBy, setLocked, locked) {
   let newestPost = false;
   let secondNewestPost = false;
   let interactedUserPost 
@@ -70,15 +70,23 @@ export default function createPosts(post, goToProfile, postArr, navigate, setCom
     if (interactedUserPost.length === 0){
       hearted = false
     } else hearted = interactedUserPost[0].hearted;
+    
+    if (!locked){
+      const updatePostHeart = async () => {
+        if (!user) return navigate("../signup");
+        await setDoc(doc(db, `usercollection/${user}/likes`, `${post.id}`), {
+          hearted: !hearted,
+        });
+        refreshPage();
+      };
+      updatePostHeart();
+      setLocked(true)
+      setTimeout(unlock, 500)
+    }
+  }
 
-    const updatePostHeart = async () => {
-      if (!user) return navigate("../signup");
-      await setDoc(doc(db, `usercollection/${user}/likes`, `${post.id}`), {
-        hearted: !hearted,
-      });
-      refreshPage();
-    };
-    updatePostHeart();
+  function unlock(){
+    setLocked(false)
   }
 
   if (interactedUserPost.length === 0) {

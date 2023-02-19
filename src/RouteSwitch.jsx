@@ -93,32 +93,38 @@ function RouteSwitch() {
   React.useEffect(() => {
     updateLikedBy()
   }, [usersLikedPosts])
+
   
+  console.log(usersLikedPosts)
   function updateLikedBy(){
     posts.forEach(post => {
       usersLikedPosts.forEach(likedPost => {
         if (likedPost.id === post.uniqueid) {
-          console.log(likedPost.id.slice(0,4), likedPost.hearted)
           if (!likedPost.hearted) {
-            post.likes = post.likes - 1;
-            post.likedby.splice(post.likedby.findIndex(person => person === user), 1)
-            const removeLikes = async () => {
-              const data = await getDocs(usersCollectionRef);
-              setDoc(doc(db, `users/${post.uniqueid}`), {
-                ...post,
-              });
-            };
-            removeLikes();
-          } else {
-            post.likes = post.likes + 1
-            post.likedby.push(user)
-            const updateLikes = async () => {
-              const data = await getDocs(usersCollectionRef);
-                setDoc(doc(db, `users/${post.uniqueid}`,), {
+            if (post.likedby.some(person => person === user)){
+              post.likes = post.likes - 1;
+              post.likedby.splice(post.likedby.findIndex(person => person === user), 1)
+              const removeLikes = async () => {
+                const data = await getDocs(usersCollectionRef);
+                setDoc(doc(db, `users/${post.uniqueid}`), {
                   ...post,
-                })
-            };
-            updateLikes();
+                });
+              };
+              removeLikes();
+            }
+          } else {
+            let only1Like = post.likedby.filter((person) => person === user)
+            if (only1Like.length === 0){
+              post.likes = post.likes + 1;
+              post.likedby.push(user)
+              const updateLikes = async () => {
+                const data = await getDocs(usersCollectionRef);
+                  setDoc(doc(db, `users/${post.uniqueid}`,), {
+                    ...post,
+                  })
+              };
+              updateLikes();
+            }
           }
         }
       })
