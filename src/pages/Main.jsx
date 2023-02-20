@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import createPosts from '../helper/CreatePosts';
 import { collection, getDocs } from 'firebase/firestore';
 
+
 function Main(props) {
   const [commentsToPost, setCommentsToPost] = React.useState([])
 
@@ -15,13 +16,8 @@ function Main(props) {
 
   function signUp(){
     if (!props.loggedIn){
-      setSignUpButtonClick(true)
+      navigate("../signup")
     }
-    navigate("../signup")
-  }
-
-  function login(){
-    console.log("Logging in")
   }
 
   function signedInDiv(){
@@ -99,7 +95,7 @@ function Main(props) {
         signedInDiv() :
         <>
         <Button onclick={() => signUp()} text="Sign up" color="black button"/>
-        <Button onclick={() => login()} text="Login" color="white button"/>
+        <Button onclick={() => props.login()} text="Login" color="white button"/>
         </>}
       </div>
       </div>

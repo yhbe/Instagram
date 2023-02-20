@@ -27,46 +27,54 @@ function Signup(props) {
   function verifyGoogleAccount(){
     if (username.length < 3) return tooShortUsernameInput.classList.add("error")
     const provider = new GoogleAuthProvider();
-    console.log("Verifying")
     const auth = getAuth();
+
+    let existingUser;
+    let user
+
     signInWithPopup(auth, provider)
       .then((result) => {
         // This gives you a Google Access Token. You can use it to access the Google API.
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential.accessToken;
         // The signed-in user info.
-        const user = result.user;
+        user = result.user;
         // IdP data available using getAdditionalUserInfo(result)
         // ...
-        console.log(user, "**")
-        const createUser = async () => {
-          await addDoc(usersCollectionRef, {
-            name: user.displayName,
-            domain: username,
-            profilepicture:
-              "https://firebasestorage.googleapis.com/v0/b/instagram-38d7b.appspot.com/o/Zawantewilliams%2Fgratisography-frog-racer-free-stock-photo.jpg?alt=media&token=1e1955a1-d055-4685-8a94-0a1cbeddb46d",
-            followers: 0,
-            following: 1,
-            bio: "",
-            posts: 0
-          });
-        }; 
-        // console.log(user.displayName)
-        createUser()
-        props.setUser(username)
-        props.setLoggedIn(true)
-        navigate("../")
+        existingUser = props.allUsers.find(
+          (person) => person.email === user.email
+        );
+
+        if (existingUser){
+          user = false
+          props.setUser(existingUser.domain);
+          props.setLoggedIn(true);
+          navigate("../");
+          return
+        }
+
+      })  
+      .then(() => {
+        if (user){
+          const createUser = async () => {
+            await addDoc(usersCollectionRef, {
+              name: user.displayName,
+              domain: username,
+              profilepicture:
+                "https://firebasestorage.googleapis.com/v0/b/instagram-38d7b.appspot.com/o/Zawantewilliams%2Fgratisography-frog-racer-free-stock-photo.jpg?alt=media&token=1e1955a1-d055-4685-8a94-0a1cbeddb46d",
+              followers: 0,
+              following: 1,
+              bio: "",
+              posts: 0,
+              email: user.email,
+            });
+          };
+          createUser();
+          props.setUser(username);
+          props.setLoggedIn(true);
+          navigate("../");
+        }
       })
-      .catch((error) => {
-        // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // The email of the user's account used.
-        const email = error.customData.email;
-        // The AuthCredential type that was used.
-        const credential = GoogleAuthProvider.credentialFromError(error);
-        // ...
-      });
   }
 
   return (

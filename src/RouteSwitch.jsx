@@ -7,6 +7,9 @@ import UserPage from "./pages/UserPage"
 import UserPostPage from "./pages/UserPostPage"
 import { BrowserRouter, Routes, Route} from "react-router-dom";
 import { collection, doc, getDocs, setDoc } from "firebase/firestore";
+import { GoogleAuthProvider } from "firebase/auth";
+import { getAuth, signInWithPopup } from "firebase/auth";
+
 
 
 function RouteSwitch() {
@@ -16,6 +19,7 @@ function RouteSwitch() {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [usersLikedPosts, setUsersLikedPosts] = React.useState([])
   
+  console.log(user)
 
   const allUsersCollectionRef = collection(db, "usercollection")
   const usersCollectionRef = collection(db, "users");
@@ -131,6 +135,41 @@ function RouteSwitch() {
   }
 
 
+  function login() {
+    console.log("running login route")
+    const provider = new GoogleAuthProvider();
+    const auth = getAuth();
+
+    let foundInDatabase = false;
+    let user;
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        // The signed-in user info.
+        user = result.user;
+        // IdP data available using getAdditionalUserInfo(result)
+        // ...
+        console.log(user);
+      })
+      .then(() => {
+        if (!user) return signUp();
+        let existingUser = props.allUsers.find(
+          (person) => person.email === user.email
+        );
+        console.log(existingUser.name);
+        if (existingUser === undefined || existingUser.length === 0) {
+          return signUp();
+        } else {
+          props.setUser(existingUser.domain);
+          props.setLoggedIn(true);
+          navigate("../");
+        }
+      });
+  }
+
+
   return (
     <BrowserRouter>
       <Routes>
@@ -147,13 +186,16 @@ function RouteSwitch() {
               refreshPage={refreshPage}
               usersLikedPosts={usersLikedPosts}
               updateLikedBy={updateLikedBy}
+              allUsers={allUsers}
+              setUser={setUser}
+              login={login}
             />
           }
         />
         <Route
           path="/signup"
           element={
-            <Signup setLoggedIn={setLoggedIn} setUser={setUser} user={user} />
+            <Signup setLoggedIn={setLoggedIn} setUser={setUser} user={user} login={login} allUsers={allUsers}/>
           }
         />
         <Route
