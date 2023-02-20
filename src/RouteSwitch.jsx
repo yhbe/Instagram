@@ -95,7 +95,6 @@ function RouteSwitch() {
   }, [usersLikedPosts])
 
   
-  console.log(usersLikedPosts)
   function updateLikedBy(){
     posts.forEach(post => {
       usersLikedPosts.forEach(likedPost => {
@@ -131,6 +130,7 @@ function RouteSwitch() {
     })
   }
 
+
   return (
     <BrowserRouter>
       <Routes>
@@ -163,7 +163,13 @@ function RouteSwitch() {
         <Route
           path="/user/:userId/:postid"
           element={
-            <UserPostPage allUsers={allUsers} posts={posts} user={user} />
+            <UserPostPage
+              allUsers={allUsers}
+              posts={posts}
+              user={user}
+              usersLikedPosts={usersLikedPosts}
+              refreshPage={refreshPage}
+            />
           }
         />
       </Routes>

@@ -23,8 +23,6 @@ function UserPostPage(props) {
   React.useEffect(() => {resetData()}, []);
   
 
-  //
-
   let displayPost = downloadPost.find(post => post.uniqueid === postId)
 
     const usersCollectionRef = collection(db, `users/${postId}/usercomments`);
@@ -115,6 +113,48 @@ function UserPostPage(props) {
       }
     }
 
+    let hearted = false
+    let interactedUserPost;
+
+    if (displayPost){
+      if (props.usersLikedPosts) {
+        interactedUserPost = props.usersLikedPosts.filter(
+          (userlikedpost) => userlikedpost.id === displayPost.id
+        );
+
+        if (interactedUserPost.length === 0) {
+          hearted = false;
+        } else hearted = interactedUserPost[0].hearted;
+      }
+
+      let likes = props.posts.find(post => post.id === displayPost.id)
+      displayPost.likes = likes.likes
+    }
+    
+    const [locked, setLocked] = React.useState(false);
+
+    function updatePostHeartDatabase() {
+
+      if (!locked) {
+        const updatePostHeart = async () => {
+          if (!props.user) return navigate("../signup");
+          await setDoc(
+            doc(db, `usercollection/${props.user}/likes`, `${displayPost.id}`),
+            {
+              hearted: !hearted,
+            }
+          );
+          props.refreshPage();
+        };
+        updatePostHeart();
+        setLocked(true);
+        setTimeout(unlock, 500);
+      }
+    }
+  
+    function unlock() {
+      setLocked(false);
+    }
 
   function createPost(){
     return (
@@ -158,18 +198,31 @@ function UserPostPage(props) {
                 <hr />
                 <div className="commentsection">{commentJsx && commentJsx}</div>
                 <ul className="ul--heart-comment-share">
-                  <i class="fa-regular fa-heart"></i>
+                  {hearted ? (
+                    <i
+                      onClick={() => updatePostHeartDatabase()}
+                      class="fa-solid fa-heart"
+                    ></i>
+                  ) : (
+                    <i
+                      onClick={() => updatePostHeartDatabase()}
+                      class="fa-regular fa-heart"
+                    ></i>
+                  )}
                   <i class="fa-regular fa-comment"></i>
                   <i class="fa-regular fa-share-from-square"></i>
                 </ul>
-                <strong>20 likes</strong>
+                <strong>{displayPost.likes} likes</strong>
                 <div className="input--div">
                   <input
                     className="addacomment"
                     placeholder="Add a comment..."
                     onChange={(event) => setUserComment(event.target.value)}
                   ></input>
-                  <i onClick={() => postComment()} class="fa-solid fa-paper-plane"></i>
+                  <i
+                    onClick={() => postComment()}
+                    class="fa-solid fa-paper-plane"
+                  ></i>
                 </div>
               </div>
             </div>
