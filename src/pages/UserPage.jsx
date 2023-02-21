@@ -19,6 +19,7 @@ function User(props) {
       return true
     } else false
   })
+  console.log(userPosts)
   
   let navigate = useNavigate();
 

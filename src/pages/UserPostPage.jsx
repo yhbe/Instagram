@@ -1,6 +1,6 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
-import style from "./UserPostPage.css"
+import "./UserPostPage.css"
 import { collection, getDocs, addDoc, setDoc, doc } from "firebase/firestore";
 import { db} from "../services/firebase";
 import { useNavigate } from "react-router-dom";

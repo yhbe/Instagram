@@ -6,11 +6,14 @@ import defaultImage from "/defaultimage.jpg"
 import { db } from '../services/firebase';
 import { useNavigate } from 'react-router-dom';
 import createPosts from '../helper/CreatePosts';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, doc, setDoc, } from 'firebase/firestore';
 
+import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
+import {v4} from "uuid"
 
 function Main(props) {
   const [commentsToPost, setCommentsToPost] = React.useState([])
+  const [makeAPost, setMakeAPost] = React.useState(false)
 
   let navigate = useNavigate();
 
@@ -49,7 +52,7 @@ function Main(props) {
           </div>
           <div className="makenewpost">
             <p>
-              <i class="fa-solid fa-plus"></i>
+              <i onClick={() => setMakeAPost(true)} class="fa-solid fa-plus clickable"></i>
             </p>
             <p>New Post</p>
           </div>
@@ -61,6 +64,70 @@ function Main(props) {
   function goToProfile(event){
       console.log(event)
       navigate(`/user/${event}`)
+  }
+
+
+  const [imageUpload, setImageUpload] = React.useState(null)
+  function newPost(){
+    let existingUser = props.allUsers.find(
+      (person) => person.domain === props.user
+    );
+
+    let caption = document.querySelector(".entercaption").value
+    
+    // let posturl = false
+    const uploadImage = () => {
+      const storage = getStorage();
+      const imageUserRef = ref(storage, `${props.user}/${imageUpload.name + v4()}`);
+      uploadBytes(imageUserRef, imageUpload)
+        .then((snapshot) => {
+          getDownloadURL(snapshot.ref).then((res) => makePost(res));
+        })
+    }
+    uploadImage()
+
+    const makePost = async (res) => {
+      const sendNewUserPost = collection(
+        db,
+        `users/`
+      );
+      const userRef = doc(db, `users/${v4()}`)
+      const id = userRef.id
+      const userData = {
+        id,
+        uniqueid: id,
+        likes: 0,
+        post: res,
+        profilepicture: existingUser.profilepicture,
+        // uniqueid: ,
+        caption: caption,
+        username: existingUser.name,
+        hearted: false,
+        domain: props.user,
+      };
+      await setDoc(userRef, userData 
+      ).then(() => props.refreshPage());
+    };
+    
+  }
+
+  function createPostModal(){
+    return (
+      <div className="post-modal--container">
+      <div className="inner-post-modal-container">
+        <div className="exitModal">
+          <button onClick={() => setMakeAPost(false)} className="exitmodal-button">X</button>
+          </div>
+        <h1>Create New Post</h1>
+        <hr />
+        <input className="input--post-file" type="file" name="file" id="file" onChange={() => setImageUpload(event.target.files[0])}/>
+        <textarea name="enter caption" className="entercaption" cols="25" rows="5" placeholder="Enter a caption..."></textarea>
+        <button 
+        onClick={() => newPost()}
+        className="post--button">Post</button>
+      </div>
+      </div>
+    )
   }
 
   const [locked,setLocked] = React.useState(false)
@@ -83,6 +150,12 @@ function Main(props) {
       )
     );
   }
+
+  if (makeAPost){
+    document.querySelector("body").style.overflow = "hidden"
+  } else {
+    document.querySelector("body").style.overflow = "auto";
+  }
   
   return (
     <div className="main--container">
@@ -100,6 +173,7 @@ function Main(props) {
         </>}
       </div>
       </div>
+      {makeAPost && createPostModal()}
     </div>
   );
 }
