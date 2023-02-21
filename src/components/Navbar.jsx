@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import instagramimage from "/instagramimage.png"
 
 function Navbar(props) {
-  // console.log("navbar user", props.user)
   const [showButtons,setShowButtons] = React.useState(false)
 
   
@@ -47,11 +46,9 @@ function Navbar(props) {
     navigate("../")
   }
   
-  // console.log(props.user)
 
   function goToUserPage(){
     if (props.user){
-      console.log("goign!")
       navigate("../")
       setTimeout(() => {
         navigate(`../user/${props.user}`);

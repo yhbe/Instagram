@@ -18,9 +18,6 @@ function RouteSwitch() {
   const [allUsers,setAllUsers] = React.useState([])
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [usersLikedPosts, setUsersLikedPosts] = React.useState([])
-  
-  console.log(posts)
-  console.log(user)
 
   const allUsersCollectionRef = collection(db, "usercollection")
   const usersCollectionRef = collection(db, "users");
@@ -159,14 +156,12 @@ function RouteSwitch() {
         user = result.user;
         // IdP data available using getAdditionalUserInfo(result)
         // ...
-        console.log(user);
       })
       .then(() => {
         if (!user) return signUp();
         let existingUser = allUsers.find(
           (person) => person.email === user.email
         );
-        console.log(existingUser.name);
         if (existingUser === undefined || existingUser.length === 0) {
           return signUp();
         } else {
@@ -183,9 +178,8 @@ function RouteSwitch() {
         return -1
       } else return 1
     })
-    console.log(Date.now())
   }
-
+  
 
   return (
     <BrowserRouter>

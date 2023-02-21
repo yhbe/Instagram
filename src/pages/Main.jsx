@@ -62,7 +62,6 @@ function Main(props) {
   }
 
   function goToProfile(event){
-      console.log(event)
       navigate(`/user/${event}`)
   }
 

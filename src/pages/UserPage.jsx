@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 
 function User(props) {
+  console.log(props)
   let path = window.location.pathname
   path = path.split("/")
   
@@ -15,7 +16,7 @@ function User(props) {
   userProfile = props.allUsers.find(user => user.domain === userProfile)
   
   let userPosts = props.posts.filter(user => {
-    if (user.domain === userProfile.id){
+    if (user.domain === userProfile.domain){
       return true
     } else false
   })
