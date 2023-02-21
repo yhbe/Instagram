@@ -154,11 +154,13 @@ hr{
   .righthalf--container{
     margin-bottom: 100px;
     height: 50vh;
+    width: 100vw;
   }
 
   .image--container{
     width: 100vw;
   }
+  
   .post-image{
     border-radius: 0;
   }
@@ -169,5 +171,10 @@ hr{
   
   .bottomhalf-half{
     margin: 0;
+  }
+
+  .user-comment-image{
+    min-width: 30px;
+    min-height: 30px;
   }
 }
