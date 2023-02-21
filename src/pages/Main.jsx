@@ -173,7 +173,7 @@ function Main(props) {
         signedInDiv() :
         <>
         <Button onclick={() => signUp()} text="Sign up" color="black button"/>
-        <Button onclick={() => props.login()} text="Login" color="white button"/>
+        <Button onclick={() => props.login(props.allUsers,props.setUser,props.setLoggedIn,navigate)} text="Login" color="white button"/>
         </>}
       </div>
       </div>

@@ -5,7 +5,7 @@ import React from 'react';
 import Signup from './pages/Signup';
 import UserPage from "./pages/UserPage"
 import UserPostPage from "./pages/UserPostPage"
-import { BrowserRouter, Routes, Route} from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useNavigate} from "react-router-dom";
 import { collection, doc, getDocs, setDoc } from "firebase/firestore";
 import { GoogleAuthProvider } from "firebase/auth";
 import { getAuth, signInWithPopup } from "firebase/auth";
@@ -144,8 +144,7 @@ function RouteSwitch() {
   }
 
 
-  function login() {
-    console.log("running login route")
+  function login(allUsers,setUser,setLoggedIn,navigate) {
     const provider = new GoogleAuthProvider();
     const auth = getAuth();
 
@@ -164,15 +163,15 @@ function RouteSwitch() {
       })
       .then(() => {
         if (!user) return signUp();
-        let existingUser = props.allUsers.find(
+        let existingUser = allUsers.find(
           (person) => person.email === user.email
         );
         console.log(existingUser.name);
         if (existingUser === undefined || existingUser.length === 0) {
           return signUp();
         } else {
-          props.setUser(existingUser.domain);
-          props.setLoggedIn(true);
+          setUser(existingUser.domain);
+          setLoggedIn(true);
           navigate("../");
         }
       });

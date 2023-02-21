@@ -98,7 +98,7 @@ function Signup(props) {
     <div className='button--container'>
       <Button onclick={() => verifyGoogleAccount()} text={"Sign Up With Google"} color={"gray button"}/>
       <p className='signup--text'>Already Signed up?</p>
-      <Button text={"Login"} color="gray outline button"/>
+      <Button onclick={() => props.login(props.allUsers,props.setUser,props.setLoggedIn, navigate)} text={"Login"} color="gray outline button"/>
     </div>
 
     </div>
