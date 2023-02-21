@@ -193,14 +193,29 @@ function UserPostPage(props) {
                     <div className="imgandusername">
                       <div className="profilepicture-container">
                         <img
-                          className="profilepicture"
+                          onClick={() =>
+                            navigate(`../user/${displayPost.domain}`)
+                          }
+                          className="profilepicture clickable"
                           src={displayPost.profilepicture}
                           alt="profile picture"
                         />
                       </div>
                       <div className="usernameanddomain--container">
-                        <h1>{displayPost.username}</h1>
-                        <p className="domain--name graytext">
+                        <h1
+                          className="clickable"
+                          onClick={() =>
+                            navigate(`../user/${displayPost.domain}`)
+                          }
+                        >
+                          {displayPost.username}
+                        </h1>
+                        <p
+                          onClick={() =>
+                            navigate(`../user/${displayPost.domain}`)
+                          }
+                          className="domain--name graytext clickable"
+                        >
                           @{displayPost.domain}
                         </p>
                       </div>
