@@ -93,18 +93,18 @@ export default function createPosts(post, goToProfile, postArr, navigate, setCom
     hearted = false;
   } else hearted = interactedUserPost[0].hearted;
 
-
   return (
     <div id={post.domain} className="instagram--post">
       <div className="instagram--post-header">
         <div className="header-left">
           <img
-            className="post--profile-picture"
+            onClick={() => goToProfile(post.domain)}
+            className="post--profile-picture clickable"
             src={post.profilepicture}
           ></img>
           <div
-            onClick={(event) => goToProfile(event)}
-            className="header-left-text"
+            onClick={(event) => goToProfile(post.domain)}
+            className="header-left-text clickable"
           >
             <p>{post.username}</p>
             <p className="user-domain">@{post.domain}</p>
@@ -125,16 +125,22 @@ export default function createPosts(post, goToProfile, postArr, navigate, setCom
             {hearted ? (
               <i
                 onClick={() => updatePostHeartDatabase()}
-                class="fa-solid fa-heart"
+                class="fa-solid fa-heart clickable"
               ></i>
             ) : (
               <i
                 onClick={() => updatePostHeartDatabase()}
-                class="fa-regular fa-heart"
+                class="fa-regular fa-heart clickable"
               ></i>
             )}
-            <i class="fa-regular fa-comment"></i>
-            <i class="fa-regular fa-share-from-square"></i>
+            <i
+              onClick={() => navigate(`./user/${post.domain}/${post.uniqueid}`)}
+              class="fa-regular fa-comment clickable"
+            ></i>
+            <i
+              onClick={() => navigate(`./user/${post.domain}/${post.uniqueid}`)}
+              class="fa-regular fa-share-from-square clickable"
+            ></i>
           </div>
           <i class="fa-solid fa-link"></i>
         </div>
@@ -185,7 +191,7 @@ export default function createPosts(post, goToProfile, postArr, navigate, setCom
             />
             <i
               onClick={() => postComment()}
-              class="fa-solid fa-paper-plane"
+              class="fa-solid fa-paper-plane clickable"
             ></i>
           </div>
         </div>

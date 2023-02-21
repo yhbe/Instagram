@@ -193,10 +193,13 @@
   }
 }
 
-.post{
+.post, .clickable{
   cursor: pointer;
 }
 
+.unclickable {
+  cursor: auto;
+}
 
 
 @media screen and (max-width: 960px) {

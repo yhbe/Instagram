@@ -30,10 +30,10 @@ function Navbar(props) {
           <i className="fa-sharp fa-solid fa-house-chimney"></i>
         </li>
         <li>
-          <i className="fa-regular fa-comment"></i>
+          <i className="fa-regular fa-comment unclickable"></i>
         </li>
         <li>
-          <i className="fa-regular fa-heart"></i>
+          <i className="fa-regular fa-heart unclickable"></i>
         </li>
         <li onClick={() => goToUserPage()}>
           <i className="fa-regular fa-user"></i>

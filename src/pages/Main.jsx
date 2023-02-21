@@ -25,7 +25,9 @@ function Main(props) {
       <div className="your-profile-info-container">
         <div className="yourprofileinnercontainer">
           <div className="yourinfo-container-image">
-            <img src={defaultImage} className="yourinfo-image"></img>
+            <img 
+            onClick={() => navigate(`./user/${props.user}`)}
+            src={defaultImage} className="yourinfo-image clickable"></img>
           </div>
           <div className="yourinfo-text">
             <h2>Hello</h2>
@@ -57,9 +59,8 @@ function Main(props) {
   }
 
   function goToProfile(event){
-    let id =
-      event.target.parentElement.parentElement.parentElement.parentElement.id;
-      navigate(`/user/${id}`)
+      console.log(event)
+      navigate(`/user/${event}`)
   }
 
   const [locked,setLocked] = React.useState(false)

@@ -201,12 +201,12 @@ function UserPostPage(props) {
                   {hearted ? (
                     <i
                       onClick={() => updatePostHeartDatabase()}
-                      class="fa-solid fa-heart"
+                      class="fa-solid fa-heart clickable"
                     ></i>
                   ) : (
                     <i
                       onClick={() => updatePostHeartDatabase()}
-                      class="fa-regular fa-heart"
+                      class="fa-regular fa-heart clickable"
                     ></i>
                   )}
                   <i class="fa-regular fa-comment"></i>
@@ -221,7 +221,7 @@ function UserPostPage(props) {
                   ></input>
                   <i
                     onClick={() => postComment()}
-                    class="fa-solid fa-paper-plane"
+                    class="fa-solid fa-paper-plane clickable"
                   ></i>
                 </div>
               </div>
