@@ -158,7 +158,7 @@ function UserPostPage(props) {
     function deletePostButton(){
       return (
         <>
-          <i onClick={() => deletePost(displayPost)} class="fa-regular fa-trash-can clickable"></i>
+          <i onClick={() => deletePost(displayPost)} class="rightmargin fa-regular fa-trash-can clickable"></i>
         </>
       );
     }

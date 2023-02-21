@@ -63,7 +63,9 @@
   display: flex;
   margin: auto;
 }
+
 .ul--heart-comment-share{
+  display: flex;
   padding-top: 10px;
   font-size: 1.2rem;
 }
@@ -136,6 +138,10 @@
 
 hr{
   border: 1px solid gainsboro;
+}
+
+.rightmargin{
+  margin-left: auto
 }
 
 @media screen and (max-width: 790px) {

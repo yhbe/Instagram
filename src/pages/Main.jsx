@@ -155,6 +155,7 @@ function Main(props) {
   }
 
   if (makeAPost){
+    window.scrollTo({ top: 0, behavior: "smooth" });
     document.querySelector("body").style.overflow = "hidden"
   } else {
     document.querySelector("body").style.overflow = "auto";
