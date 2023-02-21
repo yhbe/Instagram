@@ -192,7 +192,7 @@ function UserPostPage(props) {
                     </div>
                   </div>
                   <div className="bottomhalf-half">
-                    <p className="image--caption">{displayPost.bio}</p>
+                    <p className="image--caption">{displayPost.caption}</p>
                   </div>
                 </div>
                 <hr />

@@ -104,6 +104,7 @@ function Main(props) {
         username: existingUser.name,
         hearted: false,
         domain: props.user,
+        time: Date.now(),
       };
       await setDoc(userRef, userData 
       ).then(() => props.refreshPage());
@@ -123,7 +124,10 @@ function Main(props) {
         <input className="input--post-file" type="file" name="file" id="file" onChange={() => setImageUpload(event.target.files[0])}/>
         <textarea name="enter caption" className="entercaption" cols="25" rows="5" placeholder="Enter a caption..."></textarea>
         <button 
-        onClick={() => newPost()}
+        onClick={() => {
+          setMakeAPost(false)
+          newPost()
+        }}
         className="post--button">Post</button>
       </div>
       </div>

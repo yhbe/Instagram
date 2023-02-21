@@ -91,6 +91,14 @@ function RouteSwitch() {
       };
       fetchComments();
     });
+
+    const getData = async () => {
+      const data = await getDocs(usersCollectionRef);
+      setPosts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    };
+
+    getData()
+
     let inputs = document.querySelectorAll(".addacomment-input");
     inputs.forEach((input) => (input.value = ""));
   }
@@ -168,6 +176,15 @@ function RouteSwitch() {
           navigate("../");
         }
       });
+  }
+
+  if (posts){
+    posts.sort((a,b) =>  {
+      if (a.time > b.time){
+        return -1
+      } else return 1
+    })
+    console.log(Date.now())
   }
 
 
