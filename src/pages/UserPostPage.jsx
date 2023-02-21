@@ -1,10 +1,9 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
 import "./UserPostPage.css"
-import { collection, getDocs, addDoc, setDoc, doc } from "firebase/firestore";
+import { collection, getDocs, addDoc, setDoc, doc, deleteDoc } from "firebase/firestore";
 import { db} from "../services/firebase";
 import { useNavigate } from "react-router-dom";
-
 
 function UserPostPage(props) {
   let path = window.location.pathname;
@@ -156,6 +155,22 @@ function UserPostPage(props) {
       setLocked(false);
     }
 
+    function deletePostButton(){
+      return (
+        <>
+          <i onClick={() => deletePost(displayPost)} class="fa-regular fa-trash-can clickable"></i>
+        </>
+      );
+    }
+
+    function deletePost(post){
+      const docRef = doc(db, "users", post.id)
+      deleteDoc(docRef).then(() => {
+        navigate(`../user/${post.domain}`)
+        props.refreshPage()
+      })
+    }
+
   function createPost(){
     return (
       <>
@@ -211,6 +226,7 @@ function UserPostPage(props) {
                   )}
                   <i class="fa-regular fa-comment"></i>
                   <i class="fa-regular fa-share-from-square"></i>
+                  {displayPost.domain === props.user ? deletePostButton() : ""}
                 </ul>
                 <strong>{displayPost.likes} likes</strong>
                 <div className="input--div">
