@@ -1,6 +1,6 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
-import style from "./Signup.css"
+import "./Signup.css"
 import Button from '../components/Button'
 import image from "/instagramimage.png"
 import { useNavigate } from "react-router-dom";

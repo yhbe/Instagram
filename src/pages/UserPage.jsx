@@ -1,7 +1,7 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
 import defBgImg from "/defaultprofilebackground.jpg"
-import style from "./UserPage.css"
+import  "./UserPage.css"
 import Button from '../components/Button'
 import { collection, addDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
