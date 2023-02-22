@@ -43,13 +43,13 @@ function Navbar(props) {
   
   let navigate = useNavigate();
   function homePage(){
-    navigate("../")
+    navigate("../Instagram");
   }
   
 
   function goToUserPage(){
     if (props.user){
-      navigate("../")
+      navigate("../Instagram");
       setTimeout(() => {
         navigate(`../user/${props.user}`);
       }, "1 second");
