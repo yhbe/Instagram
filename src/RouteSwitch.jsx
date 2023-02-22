@@ -169,7 +169,7 @@ function RouteSwitch() {
         } else {
           setUser(existingUser.domain);
           setLoggedIn(true);
-          navigate("../");
+          navigate("../Instagram");
         }
       });
   }
@@ -187,7 +187,7 @@ function RouteSwitch() {
     <BrowserRouter>
       <Routes>
         <Route
-          path="/"
+          path="/Instagram"
           element={
             <Main
               loggedIn={loggedIn}

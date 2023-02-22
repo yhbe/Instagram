@@ -49,7 +49,7 @@ function Signup(props) {
           user = false
           props.setUser(existingUser.domain);
           props.setLoggedIn(true);
-          navigate("../");
+          navigate("../Instagram");
           return
         }
 
@@ -72,7 +72,7 @@ function Signup(props) {
           createUser();
           props.setUser(username);
           props.setLoggedIn(true);
-          navigate("../");
+          navigate("../Instagram");
         }
       })
   }
