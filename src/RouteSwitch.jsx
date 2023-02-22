@@ -124,7 +124,6 @@ function RouteSwitch() {
               removeLikes();
             }
           } else {
-            console.log(post)
             let only1Like = post.likedby.filter((person) => person === user)
             if (only1Like.length === 0){
               post.likes = post.likes + 1;

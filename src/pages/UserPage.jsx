@@ -8,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 
 
 function User(props) {
-  console.log(props)
   let path = window.location.pathname
   path = path.split("/")
   
@@ -20,7 +19,6 @@ function User(props) {
       return true
     } else false
   })
-  console.log(userPosts)
   
   let navigate = useNavigate();
 
@@ -45,6 +43,7 @@ function User(props) {
     }
 
     userPosts = userPosts.map(post => showPostPreview(post))
+    let amountOfPosts = userPosts.length 
 
     let showUnfollow = true
 
@@ -92,7 +91,7 @@ function User(props) {
                 <h1 className="userprofile-name">{userProfile.name}</h1>
                 <p className="userprofile--domain">@{userProfile.domain}</p>
                 <div className="amount-of-posts larger">
-                  <h4 className="large">{userProfile.posts}</h4>
+                  <h4 className="large">{amountOfPosts}</h4>
                   <p className="post-text">Posts</p>
                 </div>
                 <hr />
