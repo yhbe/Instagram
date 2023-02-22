@@ -133,7 +133,6 @@ function UserPostPage(props) {
     const [locked, setLocked] = React.useState(false);
 
     function updatePostHeartDatabase() {
-
       if (!locked) {
         const updatePostHeart = async () => {
           if (!props.user) return navigate("../signup");
@@ -167,7 +166,7 @@ function UserPostPage(props) {
       const docRef = doc(db, "users", post.id)
       deleteDoc(docRef).then(() => {
         navigate(`../user/${post.domain}`)
-        props.refreshPage()
+        props.refreshPage("Refresh posts too")
       })
     }
 

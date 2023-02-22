@@ -156,6 +156,11 @@
   gap: 20px;
 }
 
+.yourinfo--footer:hover{
+  color: white;
+  background-color: rgba(0, 0, 0, 0.863);
+}
+
 .yourinfo-container-image{
   height: 80px;
   width: 80px;
@@ -168,6 +173,10 @@
   object-fit: cover;
   object-position: center;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.514);
+}
+
+.makenewpost:hover{
+  cursor: pointer;
 }
 
 .addacomment-input-div{

@@ -63,7 +63,7 @@ function RouteSwitch() {
     });
   }, [posts])
   
-  function refreshPage() {
+  function refreshPage(refreshPosts) {
     const getAllUserLikes = async () => {
       const data = await getDocs(likedPostsCollectionRef);
       setUsersLikedPosts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
@@ -89,12 +89,14 @@ function RouteSwitch() {
       fetchComments();
     });
 
-    const getData = async () => {
-      const data = await getDocs(usersCollectionRef);
-      setPosts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    };
+    if (refreshPosts) {
+      const getData = async () => {
+        const data = await getDocs(usersCollectionRef);
+        setPosts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      };
 
-    getData()
+      getData();
+    }
 
     let inputs = document.querySelectorAll(".addacomment-input");
     inputs.forEach((input) => (input.value = ""));
@@ -122,6 +124,7 @@ function RouteSwitch() {
               removeLikes();
             }
           } else {
+            console.log(post)
             let only1Like = post.likedby.filter((person) => person === user)
             if (only1Like.length === 0){
               post.likes = post.likes + 1;

@@ -28,9 +28,11 @@ function Main(props) {
       <div className="your-profile-info-container">
         <div className="yourprofileinnercontainer">
           <div className="yourinfo-container-image">
-            <img 
-            onClick={() => navigate(`./user/${props.user}`)}
-            src={defaultImage} className="yourinfo-image clickable"></img>
+            <img
+              onClick={() => navigate(`./user/${props.user}`)}
+              src={defaultImage}
+              className="yourinfo-image clickable"
+            ></img>
           </div>
           <div className="yourinfo-text">
             <h2>Hello</h2>
@@ -50,9 +52,9 @@ function Main(props) {
             <p>0</p>
             <p>Posts</p>
           </div>
-          <div className="makenewpost">
+          <div onClick={() => setMakeAPost(true)} className="makenewpost">
             <p>
-              <i onClick={() => setMakeAPost(true)} class="fa-solid fa-plus clickable"></i>
+              <i class="fa-solid fa-plus clickable"></i>
             </p>
             <p>New Post</p>
           </div>
@@ -98,15 +100,15 @@ function Main(props) {
         likes: 0,
         post: res,
         profilepicture: existingUser.profilepicture,
-        // uniqueid: ,
         caption: caption,
         username: existingUser.name,
         hearted: false,
         domain: props.user,
         time: Date.now(),
+        likedby: [],
       };
       await setDoc(userRef, userData 
-      ).then(() => props.refreshPage());
+      ).then(() => props.refreshPage("Refresh posts too"));
     };
     
   }
