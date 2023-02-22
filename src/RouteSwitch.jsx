@@ -51,6 +51,7 @@ function RouteSwitch() {
         `users/${post.uniqueid}/usercomments`
       );
       const fetchComments = async () => {
+        setEachPostComments([]);
         const data = await getDocs(usersCollectionRef);
         setEachPostComments((prevState) => {
           return [
@@ -62,7 +63,7 @@ function RouteSwitch() {
       fetchComments();
     });
   }, [posts])
-  
+
   function refreshPage(refreshPosts) {
     const getAllUserLikes = async () => {
       const data = await getDocs(likedPostsCollectionRef);
@@ -70,14 +71,14 @@ function RouteSwitch() {
     };
 
     getAllUserLikes();
-
-    setEachPostComments([]);
+    
     posts.forEach((post) => {
       const usersCollectionRef = collection(
         db,
         `users/${post.uniqueid}/usercomments`
-      );
-      const fetchComments = async () => {
+        );
+        const fetchComments = async () => {
+        setEachPostComments([]);
         const data = await getDocs(usersCollectionRef);
         setEachPostComments((prevState) => {
           return [
@@ -94,7 +95,6 @@ function RouteSwitch() {
         const data = await getDocs(usersCollectionRef);
         setPosts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
       };
-
       getData();
     }
 

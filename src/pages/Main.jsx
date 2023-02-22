@@ -166,20 +166,44 @@ function Main(props) {
   return (
     <div className="main--container">
       <Navbar user={props.user} />
-      <div className='content--div'>
-      <div className='main--content'>
-      {homepagePosts}
-      </div>
-      <div className='signup-login--container'>
-        {props.loggedIn ? 
-        signedInDiv() :
-        <>
-        <Button onclick={() => signUp()} text="Sign up" color="black button"/>
-        <Button onclick={() => props.login(props.allUsers,props.setUser,props.setLoggedIn,navigate)} text="Login" color="white button"/>
-        </>}
-      </div>
+      <div className="content--div">
+        <div className="main--content">{homepagePosts}</div>
+        <div className="signup-login--container">
+          {props.loggedIn ? (
+            signedInDiv()
+          ) : (
+            <>
+              <Button
+                onclick={() => signUp()}
+                text="Sign up"
+                color="black button"
+              />
+              <Button
+                onclick={() =>
+                  props.login(
+                    props.allUsers,
+                    props.setUser,
+                    props.setLoggedIn,
+                    navigate
+                  )
+                }
+                text="Login"
+                color="white button"
+              />
+            </>
+          )}
+        </div>
       </div>
       {makeAPost && createPostModal()}
+      <div className="iconby">
+        Instagram icon from &nbsp;
+        <a
+          href="https://www.flaticon.com/free-icons/instagram"
+          title="instagram icons"
+        >
+          Instagram icons created by Freepik - Flaticon
+        </a>
+      </div>
     </div>
   );
 }
