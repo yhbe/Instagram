@@ -5,6 +5,7 @@ import style from "./UserPage.css"
 import Button from '../components/Button'
 import { collection, addDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
+import { v4 } from 'uuid'
 
 
 function User(props) {
@@ -30,6 +31,7 @@ function User(props) {
       let id = post.uniqueid
       return (
         <div
+          key={post.id + v4()}
           onClick={() => navigateUserPost(id)}
           className="postpreview--main-container"
         >
@@ -78,7 +80,7 @@ function User(props) {
                     </Button>
                     <Button
                       color={"white button small"}
-                      text={<i class="fa-solid fa-share"></i>}
+                      text={<i className="fa-solid fa-share"></i>}
                     ></Button>
                   </div>
                 )}

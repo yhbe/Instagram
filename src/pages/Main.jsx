@@ -54,7 +54,7 @@ function Main(props) {
           </div>
           <div onClick={() => setMakeAPost(true)} className="makenewpost">
             <p>
-              <i class="fa-solid fa-plus clickable"></i>
+              <i className="fa-solid fa-plus clickable"></i>
             </p>
             <p>New Post</p>
           </div>

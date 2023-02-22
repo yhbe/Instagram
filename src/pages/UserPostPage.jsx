@@ -4,6 +4,7 @@ import "./UserPostPage.css"
 import { collection, getDocs, addDoc, setDoc, doc, deleteDoc } from "firebase/firestore";
 import { db} from "../services/firebase";
 import { useNavigate } from "react-router-dom";
+import { v4 } from 'uuid';
 
 function UserPostPage(props) {
   let path = window.location.pathname;
@@ -62,7 +63,7 @@ function UserPostPage(props) {
 
     function createCommentJsx(user){
       return (
-        <div className="user--comment-container">
+        <div key={v4()} className="user--comment-container">
           <div className="user--comment-image-container">
             <img
               className="user-comment-image"
@@ -157,7 +158,7 @@ function UserPostPage(props) {
     function deletePostButton(){
       return (
         <>
-          <i onClick={() => deletePost(displayPost)} class="rightmargin fa-regular fa-trash-can clickable"></i>
+          <i onClick={() => deletePost(displayPost)} className="rightmargin fa-regular fa-trash-can clickable"></i>
         </>
       );
     }
@@ -230,16 +231,16 @@ function UserPostPage(props) {
                   {hearted ? (
                     <i
                       onClick={() => updatePostHeartDatabase()}
-                      class="fa-solid fa-heart clickable"
+                      className="fa-solid fa-heart clickable"
                     ></i>
                   ) : (
                     <i
                       onClick={() => updatePostHeartDatabase()}
-                      class="fa-regular fa-heart clickable"
+                      className="fa-regular fa-heart clickable"
                     ></i>
                   )}
-                  <i class="fa-regular fa-comment"></i>
-                  <i class="fa-regular fa-share-from-square"></i>
+                  <i className="fa-regular fa-comment"></i>
+                  <i className="fa-regular fa-share-from-square"></i>
                   {displayPost.domain === props.user ? deletePostButton() : ""}
                 </ul>
                 <strong>{displayPost.likes} likes</strong>
@@ -251,7 +252,7 @@ function UserPostPage(props) {
                   ></input>
                   <i
                     onClick={() => postComment()}
-                    class="fa-solid fa-paper-plane clickable"
+                    className="fa-solid fa-paper-plane clickable"
                   ></i>
                 </div>
               </div>

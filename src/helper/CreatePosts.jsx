@@ -94,7 +94,7 @@ export default function createPosts(post, goToProfile, postArr, navigate, setCom
   } else hearted = interactedUserPost[0].hearted;
 
   return (
-    <div id={post.domain} className="instagram--post">
+    <div key={post.id} id={post.domain} className="instagram--post">
       <div className="instagram--post-header">
         <div className="header-left">
           <img
@@ -125,24 +125,24 @@ export default function createPosts(post, goToProfile, postArr, navigate, setCom
             {hearted ? (
               <i
                 onClick={() => updatePostHeartDatabase()}
-                class="fa-solid fa-heart clickable"
+                className="fa-solid fa-heart clickable"
               ></i>
             ) : (
               <i
                 onClick={() => updatePostHeartDatabase()}
-                class="fa-regular fa-heart clickable"
+                className="fa-regular fa-heart clickable"
               ></i>
             )}
             <i
               onClick={() => navigate(`./user/${post.domain}/${post.uniqueid}`)}
-              class="fa-regular fa-comment clickable"
+              className="fa-regular fa-comment clickable"
             ></i>
             <i
               onClick={() => navigate(`./user/${post.domain}/${post.uniqueid}`)}
-              class="fa-regular fa-share-from-square clickable"
+              className="fa-regular fa-share-from-square clickable"
             ></i>
           </div>
-          <i class="fa-solid fa-link"></i>
+          <i className="fa-solid fa-link"></i>
         </div>
         <p className="likes">{post.likes} Likes</p>
         <div className="comments--row">
@@ -191,7 +191,7 @@ export default function createPosts(post, goToProfile, postArr, navigate, setCom
             />
             <i
               onClick={() => postComment()}
-              class="fa-solid fa-paper-plane clickable"
+              className="fa-solid fa-paper-plane clickable"
             ></i>
           </div>
         </div>
