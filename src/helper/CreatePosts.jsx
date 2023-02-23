@@ -114,7 +114,7 @@ export default function createPosts(post, goToProfile, postArr, navigate, setCom
       </div>
       <div className="instagram--post-image">
         <img
-          onClick={() => navigate(`./user/${post.domain}/${post.uniqueid}`)}
+          onClick={() => navigate(`../Instagram/user/${post.domain}/${post.uniqueid}`)}
           className="image"
           src={post.post}
         ></img>
@@ -134,11 +134,11 @@ export default function createPosts(post, goToProfile, postArr, navigate, setCom
               ></i>
             )}
             <i
-              onClick={() => navigate(`./user/${post.domain}/${post.uniqueid}`)}
+              onClick={() => navigate(`../Instagram/user/${post.domain}/${post.uniqueid}`)}
               className="fa-regular fa-comment clickable"
             ></i>
             <i
-              onClick={() => navigate(`./user/${post.domain}/${post.uniqueid}`)}
+              onClick={() => navigate(`../Instagram/user/${post.domain}/${post.uniqueid}`)}
               className="fa-regular fa-share-from-square clickable"
             ></i>
           </div>
@@ -154,7 +154,7 @@ export default function createPosts(post, goToProfile, postArr, navigate, setCom
                   <p
                     className="post"
                     onClick={() =>
-                      navigate(`../user/${secondNewestPost.domain}`)
+                      navigate(`../Instagram/user/${secondNewestPost.domain}`)
                     }
                   >
                     <strong>{newestPost.domain}</strong> {newestPost.comment}
@@ -164,7 +164,7 @@ export default function createPosts(post, goToProfile, postArr, navigate, setCom
                   <p
                     className="post"
                     onClick={() =>
-                      navigate(`../user/${secondNewestPost.domain}`)
+                      navigate(`../Instagram/user/${secondNewestPost.domain}`)
                     }
                   >
                     <strong>{secondNewestPost.domain}</strong>{" "}

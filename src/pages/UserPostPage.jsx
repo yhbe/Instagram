@@ -9,7 +9,7 @@ import { v4 } from 'uuid';
 function UserPostPage(props) {
   let path = window.location.pathname;
   path = path.split("/")
-  let postId = path[3]
+  let postId = path[4]
 
   //i page makes a database call to get info instead of relying on passed props incase of refresh
   const usersPostCollectionRef = collection(db, "users");
@@ -66,16 +66,20 @@ function UserPostPage(props) {
         <div key={v4()} className="user--comment-container">
           <div className="user--comment-image-container">
             <img
-              className="user-comment-image"
+              className="user-comment-image clickable"
               src={user.profilepicture}
               alt="profile picture"
+              onClick={() => navigate(`../Instagram/user/${user.domain}`)}
             />
           </div>
-          <p className='username--'>
+          <p
+            onClick={() => navigate(`../Instagram/user/${user.domain}`)}
+            className="username-- clickable"
+          >
             <strong>{user.domain}</strong>
           </p>
           &nbsp;
-          <p className='user-comment'>{user.comment}</p>
+          <p className="user-comment">{user.comment}</p>
         </div>
       );
     }
@@ -166,7 +170,7 @@ function UserPostPage(props) {
     function deletePost(post){
       const docRef = doc(db, "users", post.id)
       deleteDoc(docRef).then(() => {
-        navigate(`../user/${post.domain}`)
+        navigate(`../Instagram/user/${post.domain}`)
         props.refreshPage("Refresh posts too")
       })
     }
@@ -194,7 +198,7 @@ function UserPostPage(props) {
                       <div className="profilepicture-container">
                         <img
                           onClick={() =>
-                            navigate(`../user/${displayPost.domain}`)
+                            navigate(`../Instagram/user/${displayPost.domain}`)
                           }
                           className="profilepicture clickable"
                           src={displayPost.profilepicture}
@@ -205,14 +209,14 @@ function UserPostPage(props) {
                         <h1
                           className="clickable"
                           onClick={() =>
-                            navigate(`../user/${displayPost.domain}`)
+                            navigate(`../Instagram/user/${displayPost.domain}`)
                           }
                         >
                           {displayPost.username}
                         </h1>
                         <p
                           onClick={() =>
-                            navigate(`../user/${displayPost.domain}`)
+                            navigate(`../Instagram/user/${displayPost.domain}`)
                           }
                           className="domain--name graytext clickable"
                         >

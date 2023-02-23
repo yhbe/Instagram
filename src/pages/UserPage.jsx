@@ -12,7 +12,7 @@ function User(props) {
   let path = window.location.pathname
   path = path.split("/")
   
-  let userProfile = path[2]
+  let userProfile = path[3]
   userProfile = props.allUsers.find(user => user.domain === userProfile)
   
   let userPosts = props.posts.filter(user => {
