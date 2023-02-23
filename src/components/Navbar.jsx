@@ -51,7 +51,7 @@ function Navbar(props) {
     if (props.user){
       navigate("../Instagram");
       setTimeout(() => {
-        navigate(`../user/${props.user}`);
+        navigate(`user/${props.user}`);
       }, "1 second");
     } else {
       navigate(`../signup`);

@@ -1,27 +1,34 @@
-import './App.css'
-import Main from './pages/Main';
-import {db} from "./services/firebase"
-import React from 'react';
-import Signup from './pages/Signup';
-import UserPage from "./pages/UserPage"
-import UserPostPage from "./pages/UserPostPage"
-import { BrowserRouter, Routes, Route, Navigate, useNavigate} from "react-router-dom";
+import "./App.css";
+import Main from "./pages/Main";
+import { db } from "./services/firebase";
+import React from "react";
+import Signup from "./pages/Signup";
+import UserPage from "./pages/UserPage";
+import UserPostPage from "./pages/UserPostPage";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+  useNavigate,
+} from "react-router-dom";
 import { collection, doc, getDocs, setDoc } from "firebase/firestore";
 import { GoogleAuthProvider } from "firebase/auth";
 import { getAuth, signInWithPopup } from "firebase/auth";
 
-
-
 function RouteSwitch() {
-  const [user,setUser] = React.useState(null)
-  const [posts, setPosts] = React.useState([])
-  const [allUsers,setAllUsers] = React.useState([])
+  const [user, setUser] = React.useState(null);
+  const [posts, setPosts] = React.useState([]);
+  const [allUsers, setAllUsers] = React.useState([]);
   const [loggedIn, setLoggedIn] = React.useState(false);
-  const [usersLikedPosts, setUsersLikedPosts] = React.useState([])
+  const [usersLikedPosts, setUsersLikedPosts] = React.useState([]);
 
-  const allUsersCollectionRef = collection(db, "usercollection")
+  const allUsersCollectionRef = collection(db, "usercollection");
   const usersCollectionRef = collection(db, "users");
-  const likedPostsCollectionRef = collection(db, `usercollection/${user}/likes`)
+  const likedPostsCollectionRef = collection(
+    db,
+    `usercollection/${user}/likes`
+  );
 
   React.useEffect(() => {
     const getAllUsers = async () => {
@@ -32,17 +39,18 @@ function RouteSwitch() {
       const data = await getDocs(usersCollectionRef);
       setPosts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
-    const getAllUserLikes = async() => {
+    const getAllUserLikes = async () => {
       const data = await getDocs(likedPostsCollectionRef);
-      setUsersLikedPosts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    }
+      setUsersLikedPosts(
+        data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+      );
+    };
     getAllUsers();
     getData();
-    getAllUserLikes()
+    getAllUserLikes();
   }, [user]);
 
-
-  const [eachPostComments, setEachPostComments] = React.useState([])
+  const [eachPostComments, setEachPostComments] = React.useState([]);
 
   React.useEffect(() => {
     posts.forEach((post) => {
@@ -62,22 +70,24 @@ function RouteSwitch() {
       };
       fetchComments();
     });
-  }, [posts])
+  }, [posts]);
 
   function refreshPage(refreshPosts) {
     const getAllUserLikes = async () => {
       const data = await getDocs(likedPostsCollectionRef);
-      setUsersLikedPosts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      setUsersLikedPosts(
+        data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+      );
     };
 
     getAllUserLikes();
-    
+
     posts.forEach((post) => {
       const usersCollectionRef = collection(
         db,
         `users/${post.uniqueid}/usercomments`
-        );
-        const fetchComments = async () => {
+      );
+      const fetchComments = async () => {
         setEachPostComments([]);
         const data = await getDocs(usersCollectionRef);
         setEachPostComments((prevState) => {
@@ -103,18 +113,20 @@ function RouteSwitch() {
   }
 
   React.useEffect(() => {
-    updateLikedBy()
-  }, [usersLikedPosts])
+    updateLikedBy();
+  }, [usersLikedPosts]);
 
-  
-  function updateLikedBy(){
-    posts.forEach(post => {
-      usersLikedPosts.forEach(likedPost => {
+  function updateLikedBy() {
+    posts.forEach((post) => {
+      usersLikedPosts.forEach((likedPost) => {
         if (likedPost.id === post.uniqueid) {
           if (!likedPost.hearted) {
-            if (post.likedby.some(person => person === user)){
+            if (post.likedby.some((person) => person === user)) {
               post.likes = post.likes - 1;
-              post.likedby.splice(post.likedby.findIndex(person => person === user), 1)
+              post.likedby.splice(
+                post.likedby.findIndex((person) => person === user),
+                1
+              );
               const removeLikes = async () => {
                 const data = await getDocs(usersCollectionRef);
                 setDoc(doc(db, `users/${post.uniqueid}`), {
@@ -124,30 +136,28 @@ function RouteSwitch() {
               removeLikes();
             }
           } else {
-            let only1Like = post.likedby.filter((person) => person === user)
-            if (only1Like.length === 0){
+            let only1Like = post.likedby.filter((person) => person === user);
+            if (only1Like.length === 0) {
               post.likes = post.likes + 1;
-              post.likedby.push(user)
+              post.likedby.push(user);
               const updateLikes = async () => {
                 const data = await getDocs(usersCollectionRef);
-                  setDoc(doc(db, `users/${post.uniqueid}`,), {
-                    ...post,
-                  })
+                setDoc(doc(db, `users/${post.uniqueid}`), {
+                  ...post,
+                });
               };
               updateLikes();
             }
           }
         }
-      })
-    })
+      });
+    });
   }
 
-
-  function login(allUsers,setUser,setLoggedIn,navigate) {
+  function login(allUsers, setUser, setLoggedIn, navigate) {
     const provider = new GoogleAuthProvider();
     const auth = getAuth();
 
-    let foundInDatabase = false;
     let user;
     signInWithPopup(auth, provider)
       .then((result) => {
@@ -174,14 +184,13 @@ function RouteSwitch() {
       });
   }
 
-  if (posts){
-    posts.sort((a,b) =>  {
-      if (a.time > b.time){
-        return -1
-      } else return 1
-    })
+  if (posts) {
+    posts.sort((a, b) => {
+      if (a.time > b.time) {
+        return -1;
+      } else return 1;
+    });
   }
-  
 
   return (
     <BrowserRouter>
@@ -208,15 +217,21 @@ function RouteSwitch() {
         <Route
           path="/signup"
           element={
-            <Signup setLoggedIn={setLoggedIn} setUser={setUser} user={user} login={login} allUsers={allUsers}/>
+            <Signup
+              setLoggedIn={setLoggedIn}
+              setUser={setUser}
+              user={user}
+              login={login}
+              allUsers={allUsers}
+            />
           }
         />
         <Route
-          path="/user/:userId"
+          path="Instagram/user/:userId"
           element={<UserPage allUsers={allUsers} posts={posts} user={user} />}
         />
         <Route
-          path="/user/:userId/:postid"
+          path="Instagram/user/:userId/:postid"
           element={
             <UserPostPage
               allUsers={allUsers}
@@ -230,9 +245,6 @@ function RouteSwitch() {
       </Routes>
     </BrowserRouter>
   );
-}  
+}
 
-export default RouteSwitch
-
-
-
+export default RouteSwitch;

@@ -29,7 +29,7 @@ function Main(props) {
         <div className="yourprofileinnercontainer">
           <div className="yourinfo-container-image">
             <img
-              onClick={() => navigate(`./user/${props.user}`)}
+              onClick={() => navigate(`../Instagram/user/${props.user}`)}
               src={defaultImage}
               className="yourinfo-image clickable"
             ></img>
@@ -64,7 +64,7 @@ function Main(props) {
   }
 
   function goToProfile(event){
-      navigate(`/user/${event}`)
+      navigate(`../Instagram/user/${event}`)
   }
 
 
