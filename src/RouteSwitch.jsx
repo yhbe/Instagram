@@ -170,12 +170,12 @@ function RouteSwitch() {
         // ...
       })
       .then(() => {
-        if (!user) return signUp();
+        if (!user) return navigate("../signup");
         let existingUser = allUsers.find(
           (person) => person.email === user.email
         );
         if (existingUser === undefined || existingUser.length === 0) {
-          return signUp();
+          return navigate("../signup");
         } else {
           setUser(existingUser.domain);
           setLoggedIn(true);
