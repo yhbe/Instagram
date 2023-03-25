@@ -1,7 +1,7 @@
 # Instagram Clone
 Built with React and Firebase
 
-[Live Demo](https://yhbe.github.io/Instagram/)
+View here [Instagram](https://yhbe.github.io/Instagram/)
 
 # Features
 
