@@ -11,6 +11,8 @@ View here [Instagram](https://yhbe.github.io/Instagram/)
 - Individual post pages: Each post has its own page that can be viewed.
 - Responsive design: This Instagram project was built with a responsive design approach, which means that the layout and content of the app automatically adjusts to fit different screen sizes. This ensures that the app looks great on a wide range of devices.
 
+ ![Instagram Clone](https://github-production-user-asset-6210df.s3.amazonaws.com/101876022/239614317-604d3b09-8392-4be1-9ef0-7055caf7cdfa.gif)
+ 
 ## Posts
 ![1 1](https://user-images.githubusercontent.com/101876022/221271972-a3fd7de3-24d2-482d-9409-8bb61dbe7629.png)
 
